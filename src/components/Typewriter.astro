@@ -1,0 +1,127 @@
+---
+export interface Props {
+	text: string;
+	markers?: boolean;
+	start?: string;
+	end?: string;
+	scrub?: boolean | number;
+	duration?: number;
+	autoStart?: boolean;
+}
+
+const {
+	text,
+	markers = false,
+	start = "center center",
+	end = "center top",
+	scrub,
+	duration = 2,
+	autoStart = false,
+} = Astro.props;
+
+const formatScrub = (value: boolean | number | undefined): string | undefined => {
+	if (typeof value === "number") return value.toString();
+	if (value === true) return "true";
+	if (value === false) return "false";
+	return undefined;
+};
+const formatDuration = (value: number | undefined): string | undefined =>
+	typeof value === "number" ? value.toString() : undefined;
+const scrubAttr = formatScrub(scrub);
+const durationAttr = formatDuration(duration);
+
+---
+
+<span
+	class="typewriter"
+	data-typewriter
+	data-text={text}
+	data-markers={markers ? "true" : "false"}
+	data-start={start}
+	data-end={end}
+	data-scrub={scrubAttr}
+	data-duration={durationAttr}
+	data-autostart={autoStart ? "true" : "false"}
+>
+	<span class="typing_text-heading">
+		<span class="typing_text"></span><span class="cursor" aria-hidden="true">|</span>
+	</span>
+</span>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	import { TextPlugin } from "gsap/TextPlugin";
+
+	gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+	const containers = document.querySelectorAll<HTMLElement>("[data-typewriter]");
+	for (const container of containers) {
+		const target = container.querySelector<HTMLElement>(".typing_text");
+		if (!target) continue;
+		if (container.dataset.typewriterInit === "true") continue;
+		container.dataset.typewriterInit = "true";
+
+		const value = container.getAttribute("data-text") ?? "";
+		const markers = container.getAttribute("data-markers") === "true";
+		const start = container.getAttribute("data-start") ?? "center center";
+		const end = container.getAttribute("data-end") ?? "center center";
+		const scrubAttr = container.getAttribute("data-scrub");
+		const durationAttr = container.getAttribute("data-duration");
+		const autoStartAttr = container.getAttribute("data-autostart");
+
+		let scrub: boolean | number | undefined;
+		if (scrubAttr !== null) {
+			if (scrubAttr === "true") scrub = true;
+			else if (scrubAttr === "false") scrub = false;
+			else {
+				const parsed = Number(scrubAttr);
+				scrub = Number.isNaN(parsed) ? undefined : parsed;
+			}
+		}
+
+		let durationValue: number | undefined;
+		if (durationAttr !== null) {
+			const parsed = Number(durationAttr);
+			durationValue = Number.isNaN(parsed) ? undefined : parsed;
+		}
+
+		const shouldAutoStart = autoStartAttr === "true";
+
+		const tweenConfig = {
+			duration: durationValue ?? 10,
+			text: { value },
+		};
+
+		if (shouldAutoStart) {
+			gsap.to(target, tweenConfig);
+			continue;
+		}
+
+		gsap.to(target, {
+			...tweenConfig,
+			scrollTrigger: {
+				trigger: container,
+				start,
+				end,
+				scrub,
+				markers,
+				scroller: document.scrollingElement || document.documentElement,
+			},
+		});
+	}
+</script>
+
+<style>
+
+	.cursor {
+		display: inline-block;
+		animation: blink 1s steps(2, start) infinite;
+	}
+
+	@keyframes blink {
+		to {
+			visibility: hidden;
+		}
+	}
+</style>

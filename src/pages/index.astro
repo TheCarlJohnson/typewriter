@@ -1,0 +1,25 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import PostList from '../components/PostList.astro';
+import { getSite } from '../utils/globals';
+
+const site = await getSite();
+---
+
+<PageLayout
+	title={site.title}
+>
+	<Hero
+		title={site.hero?.title ?? site.title ?? 'Typewriter'}
+		description={site.hero?.subtitle ?? site.description}
+		actions={site.hero?.actions ?? []}
+	/>
+
+	<PostList
+		heading="Blog"
+		limit={3}
+		viewAllHref="/blog"
+	/>
+		
+</PageLayout>

@@ -1,0 +1,13 @@
+site:
+  title: "Typewriter"
+  description: "A personal blog template for Astro focused on writing."
+  hero:
+    title: "Welcome to Typewriter"
+    subtitle: "A place to think out loud and share ideas."
+    actions:
+      - label: "Read the Blog"
+        href: "/blog"
+        variant: "primary"
+      - label: "Contact"
+        href: "/contact"
+        variant: "secondary"

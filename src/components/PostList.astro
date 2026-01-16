@@ -1,0 +1,138 @@
+---
+
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import FormattedDate from './FormattedDate.astro';
+import { getCollection } from 'astro:content';
+import { withBase } from '../utils/slugify';
+import Typewriter from '../components/Typewriter.astro';
+
+interface RawPost {
+    // collection item shape:
+    id?: string;
+    data?: {
+        title?: string;
+        description?: string;
+        heroImage?: ImageMetadata | string;
+        pubDate?: Date | string;
+    };
+
+    // flattened shape:
+    title?: string;
+    description?: string;
+    heroImage?: ImageMetadata | string;
+    pubDate?: Date | string;
+
+    // optional link if not a collection item:
+    href?: string;
+}
+
+export interface Props {
+    heading?: string;
+    posts?: RawPost[];
+    limit?: number;
+    viewAllHref?: string;
+    viewAllLabel?: string;
+}
+
+
+let {
+    heading = "Blog",
+    posts = [],
+    limit = 6,
+    viewAllHref,
+    viewAllLabel = "View all posts",
+} = Astro.props as Props;
+
+function getPostData(item: RawPost) {
+    return item && (item as any).data ? (item as any).data : item;
+}
+
+if (posts.length === 0) {
+    console.warn(
+        '[PostList] No posts provided; fetching from "blog" collection.'
+    );
+    posts = posts.concat(await getCollection("blog")).sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    );
+}
+
+const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
+
+---
+
+<section class="content-shell note-section">
+    <div class="space-y-8">
+        <header class="space-y-2">
+            <h2 class="text-sm 2xl:text-xl text-base-900 font-bold uppercase">
+                {heading}
+            </h2>
+        </header>
+        <div class="space-y-6">
+            {
+                visiblePosts.map((post) => {
+                    const p = getPostData(post) || {};
+                    const id = (post as any).id;
+                    const href = id
+                        ? withBase(`/blog/${id}/`)
+                        : p.href
+                            ? withBase(p.href)
+                            : withBase('/blog/');
+                    const rawDate = p.pubDate ?? null;
+                    const pubDate = rawDate
+                        ? rawDate instanceof Date
+                            ? rawDate
+                            : new Date(rawDate)
+                        : null;
+
+                    return (
+                        <a
+                            class="group block w-full rounded-[28px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-border md:flex md:items-center md:gap-6"
+                            href={href}
+                        >
+                            <div class="flex flex-1 flex-col gap-2">
+                                <p class="text-xs font-semibold uppercase tracking-[0.35em] text-muted">Blog</p>
+                                <h3 class="mt-2 text-2xl font-semibold text-ink transition-colors duration-150 group-hover:text-ink">
+                                    <Typewriter text={p.title} autoStart={false} scrub={true} start="top bottom" end="center center" />
+                                </h3>
+                                {p.description && <p class="mt-3 text-lg text-muted">{p.description}</p>}
+                                {pubDate && (
+                                    <FormattedDate
+                                        date={pubDate}
+                                        class="mt-2 text-xs uppercase tracking-[0.35em] text-muted"
+                                    />
+                                )}
+                            </div>
+                            {p.heroImage && (
+                                <figure class="mt-4 h-32 w-full overflow-hidden rounded-[18px] border border-[color:var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_80%,transparent)] md:mt-0 md:h-24 md:w-32">
+                                    {typeof p.heroImage === 'string' ? (
+                                        <img
+                                            src={p.heroImage}
+                                            alt={p.title}
+                                            loading="lazy"
+                                            class="h-full w-full object-cover"
+                                        />
+                                    ) : (
+                                        <Image
+                                            src={p.heroImage}
+                                            alt={p.title}
+                                            width={220}
+                                            height={140}
+                                            class="h-full w-full object-cover"
+                                        />
+                                    )}
+                                </figure>
+                            )}
+                        </a>
+                    );
+                })
+            }
+            <a
+                class="group block w-full rounded-[28px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 text-center text-sm font-semibold uppercase tracking-[0.3em] text-ink transition duration-200 hover:border-[color:var(--color-ink)]"
+                href={withBase(viewAllHref ?? '/blog/')}
+            >
+                {viewAllLabel}
+            </a>
+        </div>
+    </div>
+</section>
