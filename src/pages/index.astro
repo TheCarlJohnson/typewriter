@@ -1,10 +1,12 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
 import PostList from '../components/PostList.astro';
-import { getSite } from '../utils/globals';
+import { getSite } from '../utils/consts';
 
 const site = await getSite();
+
 ---
 
 <PageLayout
@@ -15,6 +17,8 @@ const site = await getSite();
 		description={site.hero?.subtitle ?? site.description}
 		actions={site.hero?.actions ?? []}
 	/>
+
+	<About author={site.author} />
 
 	<PostList
 		heading="Blog"

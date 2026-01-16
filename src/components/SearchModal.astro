@@ -9,10 +9,10 @@ import { Icon } from 'astro-icon/components';
 	aria-haspopup="dialog"
 	aria-controls="search-modal"
 	aria-expanded="false"
-	class="search-trigger"
+	class="header-button"
 >
 	<span class="sr-only">Open search dialog</span>
-	<span class="search-trigger__icon" aria-hidden="true">
+	<span class="search-trigger__icon header-button__icon" aria-hidden="true">
 		<Icon name="tabler:search" size={18} stroke-width={1} />
 	</span>
 </button>
@@ -35,8 +35,8 @@ import { Icon } from 'astro-icon/components';
 			</div>
 			<div class="search-modal__actions">
 				<span class="search-modal__hint">Esc</span>
-				<button type="button" class="search-close" id="search-close" aria-label="Close search dialog">
-					<Icon name="tabler:x" size={16} stroke-width={1.6} />
+					<button type="button" id="search-close" class="header-button" aria-label="Close search dialog">
+						<Icon class="header-button__icon" name="tabler:x" size={16} stroke-width={1.6} />
 				</button>
 			</div>
 		</div>
@@ -96,35 +96,6 @@ window.addEventListener('keydown', (event) => {
 </script>
 
 <style is:inline>
-.search-trigger {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 36px;
-	height: 36px;
-	border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
-	border-radius: 9999px;
-	background: color-mix(in oklab, var(--color-surface, #fff) 92%, transparent 8%);
-	color: var(--color-ink, currentColor);
-	transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, transform 150ms ease;
-	cursor: pointer;
-}
-
-.search-trigger:hover {
-	border-color: color-mix(in oklab, var(--color-ink, #111) 32%, transparent);
-	background: color-mix(in oklab, var(--color-surface, #fff) 85%, var(--color-ink, #111) 5%);
-	transform: translateY(-1px);
-}
-
-.search-trigger__label {
-	font-size: 0.72rem;
-}
-
-.search-trigger__icon {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-}
 
 .search-modal {
 	position: fixed;
@@ -214,25 +185,7 @@ window.addEventListener('keydown', (event) => {
 	text-transform: uppercase;
 }
 
-.search-close {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 36px;
-	height: 36px;
-	border-radius: 12px;
-	border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
-	background: color-mix(in oklab, var(--color-surface, #fff) 90%, transparent);
-	color: var(--color-ink, currentColor);
-	cursor: pointer;
-	transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
-}
 
-.search-close:hover {
-	border-color: color-mix(in oklab, var(--color-ink, #111) 26%, transparent);
-	background: color-mix(in oklab, var(--color-surface, #fff) 82%, var(--color-ink, #111) 6%);
-	transform: translateY(-1px);
-}
 
 .search-modal__footnote {
 	margin: 0.75rem 0 0;

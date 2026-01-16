@@ -7,7 +7,7 @@
 	--font-mono: var(--font-mono, "Space Mono", "Special Elite", "Courier New", monospace);
 	--color-ink: #1c1a17;
 	--color-muted: color-mix(in oklab, var(--color-ink) 70%, transparent);
-	--color-paper: #fdf4e3;
+	--color-paper: #f2f1ec;
 	--color-surface: #fffdf7;
 	--color-border: color-mix(in oklab, var(--color-ink) 14%, transparent);
 	--radius-card: 24px;
@@ -343,4 +343,46 @@
 		padding-left: var(--grid-cell);
 		padding-right: var(--grid-cell);
 	}
-}
+
+	/* Header button shared styles */
+	.header-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
+		border-radius: 9999px;
+		color: var(--color-ink, currentColor);
+		transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+		cursor: pointer;
+	} 
+
+	@media (min-width: 720px) {
+		.header-button {
+			width: 36px;
+			height: 36px;
+		}
+	}
+
+	.header-button:hover {
+		border-color: color-mix(in oklab, var(--color-ink, #111) 32%, transparent);
+		background: color-mix(in oklab, var(--color-surface, #fff) 85%, var(--color-ink, #111) 5%);
+		box-shadow: 0 12px 30px color-mix(in oklab, var(--color-ink, #111) 8%, transparent);
+	}
+
+	.header-button__label {
+		font-size: 0.72rem;
+	}
+
+	.header-button__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Ensure mobile-only nav toggle is hidden on md+ as a fallback */
+	@media (min-width: 768px) {
+		#nav-toggle { display: none !important; }
+	}
+} 

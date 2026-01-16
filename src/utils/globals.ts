@@ -1,1 +1,0 @@
-export { getSite } from './consts';

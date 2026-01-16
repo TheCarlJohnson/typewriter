@@ -1,0 +1,34 @@
+site:
+  title: "Typewriter"
+  description: "A personal blog template for Astro focused on writing."
+  hero:
+    title: "Welcome to Typewriter"
+    subtitle: "A place to think out loud and share ideas."
+    actions:
+      - label: "Read the Blog"
+        href: "/blog"
+        variant: "primary"
+      - label: "Contact"
+        href: "/contact"
+        variant: "secondary"
+        
+author:
+  name: "Rodrigo Cortez"
+  bio: |
+    A writer and developer exploring the intersection of technology, design, and everyday life. He writes
+    about web development, thoughtful tooling, and small observations that shape how we work and live.
+    When not coding, he enjoys long walks, reading essays, and experimenting with typography and layout.
+  avatar: "aiface-0.png"
+  socials:
+    - id: "x"
+      label: "X"
+      href: "#_"
+    - id: "github"
+      label: "GitHub"
+      href: "#_"
+    - id: "linkedin"
+      label: "Linkedin"
+      href: "#_"
+    - id: "email"
+      label: "Email"
+      href: "mailto:"

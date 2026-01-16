@@ -1,0 +1,30 @@
+---
+interface Props {
+  author?: any;
+}
+
+const { author } = Astro.props as Props;
+
+import Typewriter from './Typewriter.astro';
+
+const images = import.meta.glob('/src/assets/*.{png,jpg,jpeg,webp}', { eager: true, query: '?url', import: 'default' });
+const avatarKey = author && author.avatar ? `/src/assets/${author.avatar.replace(/^\//, '')}` : null;
+const avatarUrl = avatarKey ? (images[avatarKey] ?? author.avatar) : null;
+---
+
+{author ? (
+  <section class="content-shell note-section py-12 space-y-6">
+    <header class="max-w-3xl flex items-center gap-6">
+      {avatarUrl && (
+        <img src={avatarUrl} alt={author.name} class="rounded-lg w-24 h-24 object-cover flex-shrink-0" />
+      )}
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-subtle">About</p>
+        <h2 class="text-2xl sm:text-3xl font-semibold leading-tight text-ink m-0">{author.name}</h2>
+        {author.bio && <p class="text-base text-muted mt-2">
+            <Typewriter text={author.bio} scrub={true} start="top center+=300" end="top center" />
+        </p>}
+      </div>
+    </header>
+  </section>
+) : null}
