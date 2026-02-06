@@ -1,11 +1,11 @@
 site:
-  title: "Typewriter"
-  description: "A personal blog template for Astro focused on writing."
+  title: "Almost a footnote"
+  description: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
   hero:
     title: "Welcome to Typewriter"
-    subtitle: "A place to think out loud and share ideas."
+    subtitle: "Internal monologue, backed by law ——— occasionally science."
     actions:
-      - label: "Read the Blog"
+      - label: "Yeet to the Blog"
         href: "/blog"
         variant: "primary"
       - label: "Contact"
@@ -15,9 +15,9 @@ site:
 author:
   name: "Tanmay S"
   bio: |
-    A writer and developer exploring the intersection of technology, design, and everyday life. He writes
-    about web development, thoughtful tooling, and small observations that shape how we work and live.
-    When not coding, he enjoys long walks, reading essays, and experimenting with typography and layout.
+    Law student. Writer. Curious observer.
+I explore law, technology, and the quiet details of everyday life — mixing internal monologue with legal facts and the occasional touch of science. This space is where structured research meets personal reflection.
+When not writing, I’m usually walking, reading essays, or refining thoughts into something worth publishing.
   avatar: "aiface-0.png"
   socials:
     - id: "x"
