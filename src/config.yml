@@ -1,9 +1,9 @@
 site:
   title: "Almost a footnote"
-  description: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
+  description: "Almost a footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
   hero:
     title: "Welcome to Almost a footnote"
-    subtitle: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
+    subtitle: "Almost a footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
     actions:
       - label: "Yeet to the Blog"
         href: "/blog"
