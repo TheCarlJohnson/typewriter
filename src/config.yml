@@ -1,9 +1,9 @@
 site:
-  title: "Almost a footnote"
-  description: "Almost a footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
+  title: "Almost a Footnote"
+  description: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
   hero:
-    title: "Welcome to Almost a footnote"
-    subtitle: "Almost a footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
+    title: "Welcome to Almost a Footnote"
+    subtitle: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
     actions:
       - label: "Yeet to the Blog"
         href: "/blog"
@@ -16,8 +16,10 @@ author:
   name: "Tanmay S"
   bio: |
     Law student. Writer. Curious observer.
-I explore law, technology, and the quiet details of everyday life — mixing internal monologue with legal facts and the occasional touch of science. This space is where structured research meets personal reflection.
-When not writing, I’m usually walking, reading essays, or refining thoughts into something worth publishing.
+
+    I explore law, technology, and the quiet details of everyday life — mixing internal monologue with legal facts and the occasional touch of science. This space is where structured research meets personal reflection.
+
+    When not writing, I’m usually walking, reading essays, or refining thoughts into something worth publishing.
   avatar: "aiface-0.png"
   socials:
     - id: "x"
