@@ -1,15 +1,16 @@
 site:
   title: "Almost a Footnote"
   description: "A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour."
+
 hero:
-  title: "Welcome to Almost a Footnote"
-  subtitle: "A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour."
+  title: "Almost a Footnote"
+  subtitle: "Where law meets introspection."
   actions:
-    - label: "Read the Blog"
+    - label: "Read Writing"
       href: "/blog"
       variant: "primary"
 
-    - label: "Resume and Experience"
+    - label: "Resume"
       href: "/resume"
       variant: "secondary"
 
@@ -17,10 +18,8 @@ hero:
       href: "/contact"
       variant: "secondary"
 
-
-        
 author:
- name: "Tanmay S"
+  name: "Tanmay S"
   bio: |
     Law student. Writer. Curious observer.
 
@@ -36,7 +35,7 @@ author:
       label: "GitHub"
       href: "#_"
     - id: "linkedin"
-      label: "Linkedin"
+      label: "LinkedIn"
       href: "#_"
     - id: "email"
       label: "Email"
