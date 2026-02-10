@@ -2,21 +2,21 @@ site:
   title: "Almost a Footnote"
   description: "A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour."
 
-hero:
-  title: "Almost a Footnote"
-  subtitle: "Where law meets introspection."
-  actions:
-    - label: "Read Writing"
-      href: "/blog"
-      variant: "primary"
+  hero:
+    title: "Almost a Footnote"
+    subtitle: "Where law meets introspection."
+    actions:
+      - label: "Read Writing"
+        href: "/blog"
+        variant: "primary"
 
-    - label: "Resume"
-      href: "/resume"
-      variant: "secondary"
+      - label: "Resume"
+        href: "/resume"
+        variant: "secondary"
 
-    - label: "Contact"
-      href: "/contact"
-      variant: "secondary"
+      - label: "Contact"
+        href: "/contact"
+        variant: "secondary"
 
 author:
   name: "Tanmay S"
