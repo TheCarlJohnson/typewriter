@@ -1,21 +1,17 @@
 site:
   title: "Almost a Footnote"
-  description: "Where law meets introspection."
+  description: "A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour."
 hero:
   title: "Welcome to Almost a Footnote"
-  subtitle: "A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour."
+  subtitle: "Where law meets introspection."
   actions:
     - label: "Read the Blog"
       href: "/blog"
       variant: "primary"
 
-    - label: "Resume and Experience"
-      href: "/resume"
-      variant: "secondary"
-
     - label: "Contact"
       href: "/contact"
-      variant: "tertiary"
+      variant: "secondary"
 
         
 author:
