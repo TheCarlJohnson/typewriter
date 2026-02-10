@@ -5,6 +5,7 @@ site:
   hero:
     title: "Almost a Footnote"
     subtitle: "Where law meets introspection."
+    tagline: "Law student & writer exploring law, technology, and quiet ideas."
     actions:
       - label: "Read Writing"
         href: "/blog"
