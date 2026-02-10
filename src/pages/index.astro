@@ -6,12 +6,10 @@ import PostList from '../components/PostList.astro';
 import { getSite } from '../utils/consts';
 
 const site = await getSite();
-
 ---
 
-<PageLayout
-	title={site.title}
->
+<PageLayout title={site.title}>
+
 	<Hero
 		title={site.hero?.title ?? site.title ?? 'Typewriter'}
 		description={site.hero?.subtitle ?? site.description}
@@ -20,10 +18,38 @@ const site = await getSite();
 
 	<About author={site.author} />
 
+	<!-- Experience Highlights -->
+	<section style="margin-top: 3rem;">
+		<h2>Experience Highlights</h2>
+
+		<ul>
+			<li>Judicial Internship — legal research, case analysis, procedural discussions</li>
+			<li>Pro Bono Club — constitutional awareness and legal outreach</li>
+			<li>Academic Writing — arbitration, mediation, enforcement of awards</li>
+		</ul>
+
+		<p>
+			<a href="/resume">View full resume →</a>
+		</p>
+	</section>
+
+	<!-- What You'll Find Here -->
+	<section style="margin-top: 3rem;">
+		<h2>What You’ll Find Here</h2>
+
+		<ul>
+			<li>Reflections on law and legal systems</li>
+			<li>Research-driven essays on arbitration and dispute resolution</li>
+			<li>Writing at the intersection of law, technology, and everyday life</li>
+			<li>Personal observations shaped by legal thinking</li>
+		</ul>
+	</section>
+
 	<PostList
-		heading="Blog"
+		heading="Selected Writing"
 		limit={3}
 		viewAllHref="/blog"
 	/>
-		
+
 </PageLayout>
+
