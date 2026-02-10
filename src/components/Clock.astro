@@ -1,69 +1,108 @@
 ---
 export interface Props {
-	timeZone?: string;
-	locale?: string;
-	hour12?: boolean;
-	showSeconds?: boolean;
+  timeZone?: string;
+  locale?: string;
+  hour12?: boolean;
+  showSeconds?: boolean;
 }
 
 const {
-	timeZone = 'UTC',
-	locale = 'en-US',
-	hour12 = true,
-	showSeconds = false,
+  timeZone = "UTC",
+  locale = "en-IN",
+  hour12 = false,
+  showSeconds = true,
 } = Astro.props as Props;
-
-const initialTime = new Intl.DateTimeFormat(locale, {
-	timeZone,
-	hour: '2-digit',
-	minute: '2-digit',
-	second: showSeconds ? '2-digit' : undefined,
-	hour12,
-}).format(new Date());
 ---
 
 <span
-	class="clock"
-	data-timezone={timeZone}
-	data-locale={locale}
-	data-hour12={hour12}
-	data-showseconds={showSeconds}
->
-	{initialTime}
-</span>
+  class="clock font-mono tracking-wide"
+  data-timezone={timeZone}
+  data-locale={locale}
+  data-hour12={hour12}
+  data-showseconds={showSeconds}
+></span>
+
+<span
+  class="clock-date text-sm text-muted ml-2"
+  data-timezone={timeZone}
+  data-locale={locale}
+></span>
+
+<style>
+  .blink {
+    animation: blink 1s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .clock {
+    transition: opacity 0.25s ease;
+  }
+</style>
 
 <script>
-	const clocks = document.querySelectorAll('.clock');
+  const clocks = document.querySelectorAll(".clock");
+  const dates = document.querySelectorAll(".clock-date");
 
-	const formatTime = (date, { locale, timeZone, hour12, showSeconds }) => {
-		const options = {
-			timeZone,
-			hour: '2-digit',
-			minute: '2-digit',
-			second: showSeconds ? '2-digit' : undefined,
-			hour12,
-		};
+  const formatTime = (date, { locale, timeZone, hour12, showSeconds }) => {
+    const options = {
+      timeZone,
+      hour: "2-digit",
+      minute: "2-digit",
+      ...(showSeconds ? { second: "2-digit" } : {}),
+      hour12,
+    };
 
-		return new Intl.DateTimeFormat(locale, options).format(date);
-	};
+    let formatted = new Intl.DateTimeFormat(locale, options).format(date);
 
-	clocks.forEach((el) => {
-		const timeZone = el.dataset.timezone || 'UTC';
-		const locale = el.dataset.locale || 'en-US';
-		const hour12 = el.dataset.hour12 === 'true';
-		const showSeconds = el.dataset.showseconds === 'true';
+    // blinking colon
+    formatted = formatted.replace(/:/g, '<span class="blink">:</span>');
 
-		const update = () => {
-			el.textContent = formatTime(new Date(), {
-				locale,
-				timeZone,
-				hour12,
-				showSeconds,
-			});
-		};
+    return formatted;
+  };
 
-		update();
-		const intervalMs = showSeconds ? 1000 : 60_000;
-		setInterval(update, intervalMs);
-	});
+  const formatDate = (date, { locale, timeZone }) => {
+    return new Intl.DateTimeFormat(locale, {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone,
+    }).format(date);
+  };
+
+  clocks.forEach((el, index) => {
+    const timeZone = el.dataset.timezone || "UTC";
+    const locale = el.dataset.locale || "en-IN";
+    const hour12 = el.dataset.hour12 === "true";
+    const showSeconds = el.dataset.showseconds === "true";
+
+    const dateEl = dates[index];
+
+    const update = () => {
+      const now = new Date();
+
+      el.innerHTML = formatTime(now, {
+        locale,
+        timeZone,
+        hour12,
+        showSeconds,
+      });
+
+      if (dateEl) {
+        dateEl.textContent = formatDate(now, { locale, timeZone });
+      }
+
+      // subtle fade tick
+      el.style.opacity = "0.6";
+      setTimeout(() => (el.style.opacity = "1"), 150);
+    };
+
+    update();
+    setInterval(update, 1000);
+  });
 </script>
