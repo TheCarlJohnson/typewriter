@@ -1,17 +1,32 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<PageLayout
-	title="About the studio"
-	description="I’m a law student and writer interested in how legal systems, technology, and everyday structures quietly shape the way we think and live.
+<BaseLayout title="About">
 
-Almost a Footnote began as a place to think in public — to write internal monologues backed by legal reasoning, and occasionally by science. The focus is not on loud conclusions, but on careful observations, unfinished arguments, and ideas that usually remain in the margins.
+  <h1>About</h1>
 
-My academic work has largely centred on arbitration, dispute resolution, and procedural law, while my writing here explores law in conversation with technology, policy, and personal experience.
+  <p>
+    I am a law student and writer interested in how legal systems, technology, and
+    everyday structures quietly shape the way we think and live.
+  </p>
 
-Outside writing and research, I enjoy long walks, reading essays, and refining ideas until they become precise enough to stand on their own."
-	eyebrow="Studio"
->
+  <p>
+    <em>Almost a Footnote</em> began as a place to think in public — to write internal
+    monologues backed by legal reasoning, and occasionally by science. The focus is not
+    on loud conclusions, but on careful observations, unfinished arguments, and ideas
+    that usually remain in the margins.
+  </p>
 
-</PageLayout>
+  <p>
+    My academic work has largely centred on arbitration, dispute resolution, and
+    procedural law, while my writing here explores law in conversation with technology,
+    policy, and personal experience.
+  </p>
+
+  <p>
+    Outside writing and research, I enjoy long walks, reading essays, and refining ideas
+    until they become precise enough to stand on their own.
+  </p>
+
+</BaseLayout>
