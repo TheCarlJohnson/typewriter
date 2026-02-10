@@ -1,16 +1,19 @@
 site:
   title: "Almost a Footnote"
-  description: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
+  description: "Where law meets introspection."
   hero:
     title: "Welcome to Almost a Footnote"
-    subtitle: "Almost a Footnote is a quiet space for thinking in public - where legal reasoning meets personal reflection, and small observations grow into structured ideas. This is where internal monologue is backed by law, and occasionally, science."
+    subtitle: "A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour."
     actions:
-      - label: "Yeet to the Blog"
+      - label: "Read the Blog"
         href: "/blog"
         variant: "primary"
+        - label: "Resume and Experience"
+        href: "/resume"
+        variant: "secondary"
       - label: "Contact"
         href: "/contact"
-        variant: "secondary"
+        variant: "tertiary"
         
 author:
   name: "Tanmay S"
