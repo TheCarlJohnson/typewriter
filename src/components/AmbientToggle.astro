@@ -1,0 +1,77 @@
+<button id="ambient-toggle" class="ambient-btn">
+  ◯ Ambient
+</button>
+
+<style>
+.ambient-btn {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ambient-on {
+  opacity: 1;
+}
+</style>
+
+<script>
+let ctx;
+let source;
+let gain;
+
+const btn = document.getElementById("ambient-toggle");
+
+function createNoise() {
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+  const bufferSize = 2 * ctx.sampleRate;
+  const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const output = noiseBuffer.getChannelData(0);
+
+  // Pink-ish noise (much softer than white)
+  let lastOut = 0;
+  for (let i = 0; i < bufferSize; i++) {
+    const white = Math.random() * 2 - 1;
+    output[i] = (lastOut + 0.02 * white) / 1.02;
+    lastOut = output[i];
+    output[i] *= 0.3;
+  }
+
+  source = ctx.createBufferSource();
+  source.buffer = noiseBuffer;
+  source.loop = true;
+
+  gain = ctx.createGain();
+  gain.gain.value = 0.05; // VERY subtle
+
+  source.connect(gain);
+  gain.connect(ctx.destination);
+}
+
+const saved = localStorage.getItem("ambient");
+
+if (saved === "on") {
+  createNoise();
+  source.start();
+  btn.textContent = "● Ambient";
+  btn.classList.add("ambient-on");
+}
+
+btn.addEventListener("click", () => {
+  if (!ctx) {
+    createNoise();
+    source.start();
+    localStorage.setItem("ambient", "on");
+    btn.textContent = "● Ambient";
+    btn.classList.add("ambient-on");
+  } else {
+    ctx.close();
+    ctx = null;
+    localStorage.setItem("ambient", "off");
+    btn.textContent = "◯ Ambient";
+    btn.classList.remove("ambient-on");
+  }
+});
+</script>
