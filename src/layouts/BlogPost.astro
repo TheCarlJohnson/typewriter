@@ -19,75 +19,116 @@ interface Props {
 }
 
 const { title, description, pubDate, updatedDate, heroImage, tags = [], Content, body = '' } = Astro.props as Props;
-
 const stats = readingTime(body);
 ---
 
 <BaseLayout title={title} description={description} image={heroImage}>
-	<div class="content-shell">
-		<article class="post-page post max-w-4xl w-full mx-auto">
 
-			<a href="/blog" class="text-sm text-muted">← Back to writing</a>
+<div id="progress-bar"></div>
 
-			<header class="section-heading mt-4">
-				<p class="eyebrow">Journal</p>
-				<h1>{title}</h1>
+<div class="content-shell">
+<article class="post-page post max-w-4xl w-full mx-auto">
 
-				<p class="post-meta">
-					<FormattedDate date={pubDate} />
-					&nbsp;·&nbsp;{stats.text}
+<a href="/blog" class="text-sm text-muted">← Back to writing</a>
 
-					{updatedDate && (
-						<span>
-							&nbsp;· Updated <FormattedDate date={updatedDate} />
-						</span>
-					)}
-				</p>
+<header class="section-heading mt-4">
+<p class="eyebrow">Journal</p>
+<h1>{title}</h1>
 
-				<hr />
+<p class="post-meta">
+<FormattedDate date={pubDate} /> · {stats.text}
+{updatedDate && (<span> · Updated <FormattedDate date={updatedDate} /></span>)}
+</p>
 
-				{tags.length > 0 && (
-					<ul class="mt-2 flex flex-wrap gap-2 text-sm text-muted">
-						{tags.map((tag) => (
-							<li class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1">
-								<a class="hover:text-ink" href={withBase(`/tags/${slugify(tag)}/`)}>{tag}</a>
-							</li>
-						))}
-					</ul>
-				)}
-			</header>
+<hr />
 
-			{heroImage && (
-				<figure class="post-hero-image">
-					<Image width={1020} height={510} src={heroImage} alt="" />
-				</figure>
-			)}
+{tags.length > 0 && (
+<ul class="mt-2 flex flex-wrap gap-2 text-sm text-muted">
+{tags.map((tag) => (
+<li class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1">
+<a class="hover:text-ink" href={withBase(`/tags/${slugify(tag)}/`)}>{tag}</a>
+</li>
+))}
+</ul>
+)}
+</header>
 
-			<section class="post-article">
-				<Prose>
-					{Content ? <Content /> : <slot />}
-				</Prose>
-			</section>
+{heroImage && (
+<figure class="post-hero-image">
+<Image width={1020} height={510} src={heroImage} alt="" />
+</figure>
+)}
 
-		</article>
-	</div>
+<section class="post-article">
+<Prose>
+{Content ? <Content /> : <slot />}
+</Prose>
+</section>
+
+</article>
+</div>
 </BaseLayout>
 
+<script>
+const bar = document.getElementById("progress-bar");
+
+window.addEventListener("scroll", () => {
+	const scrollTop = window.scrollY;
+	const docHeight = document.body.scrollHeight - window.innerHeight;
+	bar.style.width = (scrollTop / docHeight) * 100 + "%";
+});
+
+const observer = new IntersectionObserver(entries => {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) entry.target.classList.add("visible");
+	});
+},{ threshold:0.15 });
+
+document.querySelectorAll(".post-article p").forEach(p=>{
+	p.classList.add("fade");
+	observer.observe(p);
+});
+</script>
+
 <style>
-	.post {
-		max-width: 680px;
-		margin: 0 auto;
-		line-height: 1.75;
-		font-size: 1.1rem;
-	}
+#progress-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 2px;
+	width: 0%;
+	background: var(--color-ink);
+	z-index: 999;
+}
 
-	.post p {
-		margin: 1.2em 0;
-	}
+.post {
+	max-width: 680px;
+	margin: 0 auto;
+	line-height: 1.75;
+	font-size: 1.1rem;
+}
 
-	.post h1,
-	.post h2,
-	.post h3 {
-		margin-top: 2.2em;
-	}
+.post p { margin:1.2em 0; }
+
+.post h1,.post h2,.post h3 { margin-top:2.2em; }
+
+.post-article p:first-of-type::first-letter {
+	float:left;
+	font-size:3.5rem;
+	line-height:1;
+	padding-right:.4rem;
+	padding-top:.2rem;
+	font-weight:500;
+}
+
+.fade {
+	opacity:0;
+	transform:translateY(6px);
+	transition:.6s ease;
+}
+
+.fade.visible {
+	opacity:1;
+	transform:none;
+}
 </style>
