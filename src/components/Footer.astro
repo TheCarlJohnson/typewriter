@@ -1,13 +1,13 @@
 ---
 import { getSite } from '../utils/consts';
-import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Clock from './Clock.astro';
+import AmbientToggle from './AmbientToggle.astro';
 
 const site = await getSite();
-import { Icon } from 'astro-icon/components'
-import Clock from './Clock.astro';
-
 const today = new Date();
 const socials = site.author?.socials || [];
+
 const iconMap: Record<string, string> = {
   x: 'tabler:brand-x',
   twitter: 'tabler:brand-x',
@@ -20,13 +20,17 @@ const iconMap: Record<string, string> = {
 
 <footer class="border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-8">
   <div class="content-shell">
+
     <div class="grid gap-10 border-b border-[color:var(--color-border)] pb-10 md:grid-cols-2">
+
       <div class="grid gap-3">
         <p class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Connect</p>
+
         <div class="grid gap-2 sm:grid-cols-2 text-sm text-muted">
           {socials.map((social) => {
             const iconName = social.id ? iconMap[social.id.toLowerCase()] : undefined;
             const fallback = social.label?.trim()?.[0]?.toUpperCase() ?? '?';
+
             return (
               <a
                 href={social.href}
@@ -43,16 +47,21 @@ const iconMap: Record<string, string> = {
                     aria-hidden={true}
                   />
                 ) : (
-                  <span class="inline-flex h-[26px] w-[26px] items-center justify-center rounded-full border border-[color:var(--color-border)] text-[0.7rem] font-semibold text-ink" aria-hidden="true">{fallback}</span>
+                  <span class="inline-flex h-[26px] w-[26px] items-center justify-center rounded-full border border-[color:var(--color-border)] text-[0.7rem] font-semibold text-ink">
+                    {fallback}
+                  </span>
                 )}
+
                 <span class="leading-tight">{social.label}</span>
               </a>
             );
           })}
         </div>
       </div>
+
       <div class="grid gap-3">
         <p class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Navigation</p>
+
         <div class="grid gap-2 sm:grid-cols-2 text-sm text-muted">
           <a class="transition-colors hover:text-ink" href="/">Home</a>
           <a class="transition-colors hover:text-ink" href="/blog">Blog</a>
@@ -60,22 +69,35 @@ const iconMap: Record<string, string> = {
           <a class="transition-colors hover:text-ink" href="/rss.xml">RSS</a>
         </div>
       </div>
+
     </div>
+
     <div class="grid gap-6 pt-8 pb-4 md:flex md:items-center md:justify-between">
-  <p class="text-sm text-muted m-0">
-    © {today.getFullYear()} Tanmay · Almost a Footnote
-  </p>
 
-  <div class="md:text-right space-y-2 md:space-y-1">
-    <div class="flex flex-wrap items-center gap-3 md:justify-end">
-  <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink m-0">India (IST)</p>
+      <p class="text-sm text-muted m-0">
+        © {today.getFullYear()} Tanmay · Almost a Footnote
+      </p>
 
-  <Clock
-    timeZone="Asia/Kolkata"
-    locale="en-IN"
-    hour12={false}
-    showSeconds={true}
-  />
+      <div class="md:text-right space-y-2 md:space-y-1">
 
-</div>
+        <div class="flex flex-wrap items-center gap-3 md:justify-end">
+          <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink m-0">
+            India (IST)
+          </p>
+
+          <Clock
+            timeZone="Asia/Kolkata"
+            locale="en-IN"
+            hour12={false}
+            showSeconds={true}
+          />
+
+          <AmbientToggle />
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 </footer>
