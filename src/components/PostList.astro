@@ -6,13 +6,23 @@ const posts = await getCollection('blog');
 ---
 
 <div class="grid gap-6">
-{posts.map(post => (
-<article>
-<a href={`/blog/${post.slug}/`} class="block space-y-1">
-<h3>{post.data.title}</h3>
-<p class="text-xs text-muted">{readingTime(post.body).text}</p>
-<p class="text-sm text-muted">{post.data.description}</p>
-</a>
-</article>
-))}
+  {posts.map((post) => (
+    <article>
+      <a href={`/blog/${post.id}/`} class="block space-y-1">
+
+        <h3>{post.data.title}</h3>
+
+        <p class="text-xs text-muted">
+          {readingTime(post.body).text}
+        </p>
+
+        {post.data.description && (
+          <p class="text-sm text-muted">
+            {post.data.description}
+          </p>
+        )}
+
+      </a>
+    </article>
+  ))}
 </div>
