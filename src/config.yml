@@ -11,10 +11,6 @@ site:
         href: "/blog"
         variant: "primary"
 
-      - label: "Resume"
-        href: "/resume"
-        variant: "secondary"
-
       - label: "Contact"
         href: "/contact"
         variant: "secondary"
