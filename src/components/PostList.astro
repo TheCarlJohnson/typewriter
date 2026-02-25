@@ -6,27 +6,42 @@ const posts = await getCollection('blog');
 ---
 
 <div class="grid gap-6">
-  {posts.map((post) => (
-    <article>
-      <a href={`/blog/${post.id}/`} class="block space-y-1">
+  {posts.map((post) => {
+    const stats = readingTime(post.body || '');
 
-        <h3>{post.data.title}</h3>
+    return (
+      <article>
+        <a href={`/blog/${post.id}/`} class="block space-y-1">
 
-<p class="text-xs text-muted mt-1">
-  {Math.ceil(post.data.description.split(" ").length / 200)} min read
-</p>
+          <h3>{post.data.title}</h3>
 
-        <p class="text-xs text-muted">
-          {readingTime(post.body).text}
-        </p>
-
-        {post.data.description && (
-          <p class="text-sm text-muted">
-            {post.data.description}
+          <p class="text-xs text-muted mt-1">
+            {stats.text}
           </p>
-        )}
 
-      </a>
-    </article>
-  ))}
+          {post.data.description && (
+            <p class="text-sm text-muted">
+              {post.data.description}
+            </p>
+          )}
+
+        </a>
+      </article>
+    );
+  })}
 </div>
+
+<style>
+article {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeUp .6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
