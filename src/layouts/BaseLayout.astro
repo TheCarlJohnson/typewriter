@@ -4,23 +4,21 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { getSite } from '../utils/consts';
-
 interface Props {
 	title?: string;
 	description?: string;
 	image?: ImageMetadata;
 }
-
 const site = await getSite();
 const { title = site.title, description = site.description, image } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
     <head>
         <BaseHead title={title} description={description} image={image} />
-<script data-goatcounter="https://tsk.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+        <slot name="head" />
+        <script data-goatcounter="https://tsk.goatcounter.com/count"
+                async src="//gc.zgo.at/count.js"></script>
     </head>
     <body class="page-fade">
         <Header />
@@ -33,7 +31,6 @@ const { title = site.title, description = site.description, image } = Astro.prop
 .page-fade {
   animation: pageFade 0.6s ease both;
 }
-
 @keyframes pageFade {
   from {
     opacity: 0;
