@@ -5,17 +5,21 @@ import PageLayout from '../layouts/PageLayout.astro';
 <PageLayout title="Resume — Tanmay Satvik">
 <meta name="robots" content="noindex, nofollow" />
 
-<section class="content-shell max-w-3xl space-y-10 py-16">
+<section class="content-shell max-w-3xl space-y-12 py-16">
 
 <header>
 <h1 class="text-3xl font-semibold">Tanmay Satvik</h1>
-<p class="text-muted">
+
+<p class="text-muted mt-1">
 Law Student · Arbitration · Corporate · IP · Research & Writing
 </p>
 
+<p class="text-lg text-muted mt-3">
+A legal researcher and writer with hands-on experience in arbitration, compliance research, and drafting across law firms and corporate legal teams.
+</p>
+
 <div class="flex gap-4 mt-4 text-sm">
-<a href="/Tanmay-Satvik-Resume.pdf" target="_blank" class="underline">View PDF</a>
-<a href="/Tanmay-Satvik-Resume.pdf" download class="underline">Download PDF</a>
+<a href="https://drive.google.com/file/d/FILE_ID/view" target="_blank" class="underline">View PDF</a>
 </div>
 </header>
 
@@ -124,8 +128,9 @@ LinkedIn: linkedin.com/in/tanmay-s-641a6698
 <h2>PDF Preview</h2>
 
 <iframe
-src="/Tanmay-Satvik-Resume.pdf"
-class="w-full h-[900px] border"
+  src="https://drive.google.com/file/d/1uDF3wPhJwOJjmjMezXSqlv5lNcwfpQ3S/preview"
+  class="w-full h-[1000px] border rounded"
+  allow="autoplay"
 ></iframe>
 
 </section>
@@ -145,6 +150,11 @@ ul {
 
 li {
 	margin-bottom:1rem;
+}
+
+section > p,
+section > ul {
+	margin-bottom:1.3rem;
 }
 </style>
 
