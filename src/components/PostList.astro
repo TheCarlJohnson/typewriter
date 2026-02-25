@@ -1,34 +1,36 @@
 ---
 import { getCollection } from 'astro:content';
 import readingTime from 'reading-time';
-
 const posts = await getCollection('blog');
+const sorted = posts.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
 ---
-
 <div class="grid gap-8">
-
-{posts.map((post) => (
-<article>
-
-<a href={`/blog/${post.id}/`} class="block space-y-2 group">
-
-<h3 class="text-lg font-medium group-hover:underline">
-{post.data.title}
-</h3>
-
-<p class="text-xs text-muted">
-{readingTime(post.body).text}
-</p>
-
-{post.data.description && (
-<p class="text-sm text-muted leading-relaxed">
-{post.data.description}
-</p>
-)}
-
-</a>
-
-</article>
+{sorted.map((post) => (
+  <article>
+    <a href={`/blog/${post.id}/`} class="block space-y-2 group">
+      <div class="flex items-center gap-2">
+        <h3 class="text-lg font-medium group-hover:underline">
+          {post.data.title}
+        </h3>
+        {post.data.featured && (
+          <span class="text-xs uppercase tracking-widest text-muted border px-1.5 py-0.5 rounded">
+            Pinned
+          </span>
+        )}
+      </div>
+      <p class="text-xs text-muted">
+        {readingTime(post.body ?? '').text}
+      </p>
+      {post.data.description && (
+        <p class="text-sm text-muted leading-relaxed">
+          {post.data.description}
+        </p>
+      )}
+    </a>
+  </article>
 ))}
-
 </div>
