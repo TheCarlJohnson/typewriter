@@ -50,8 +50,9 @@ const durationAttr = formatDuration(duration);
 
 <script>
 	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { TextPlugin } from "gsap/TextPlugin";
-	gsap.registerPlugin(TextPlugin);
+	gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 	function initTypewriters() {
 		const containers = document.querySelectorAll("[data-typewriter]");
@@ -72,7 +73,7 @@ const durationAttr = formatDuration(duration);
 			const duration = durationAttr ? Number(durationAttr) : 2;
 			const shouldAutoStart = autoStartAttr === "true";
 
-			let scrub: boolean | number | undefined;
+			let scrub;
 			if (scrubAttr !== null) {
 				if (scrubAttr === "true") scrub = true;
 				else if (scrubAttr === "false") scrub = false;
@@ -91,9 +92,6 @@ const durationAttr = formatDuration(duration);
 				gsap.to(target, tweenConfig);
 				continue;
 			}
-
-			const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-			gsap.registerPlugin(ScrollTrigger);
 
 			gsap.to(target, {
 				...tweenConfig,
