@@ -2,6 +2,7 @@
 title: 'Why I Write in the Margins of Law'
 description: 'On legal thinking, unfinished arguments, and finding clarity between footnotes.'
 pubDate: 2026-02-01
+featured: true
 tags:
   - writing
   - law
