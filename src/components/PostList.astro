@@ -12,6 +12,10 @@ const posts = await getCollection('blog');
 
         <h3>{post.data.title}</h3>
 
+<p class="text-xs text-muted mt-1">
+  {Math.ceil(post.data.description.split(" ").length / 200)} min read
+</p>
+
         <p class="text-xs text-muted">
           {readingTime(post.body).text}
         </p>
