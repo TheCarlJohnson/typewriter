@@ -11,10 +11,13 @@ const site = await getSite();
 <PageLayout title={site.title}>
 
 	<Hero
-		title={site.hero?.title ?? site.title ?? 'Typewriter'}
-		description={site.hero?.subtitle ?? site.description}
-		actions={site.hero?.actions ?? []}
-	/>
+  title={site.hero?.title}
+  description={site.hero?.subtitle}
+  actions={[
+    { label: "Start Reading", href: "/blog", variant: "primary" },
+    { label: "About Me", href: "/about", variant: "secondary" }
+  ]}
+/>
 
 	<About author={site.author} />
 
@@ -44,6 +47,14 @@ const site = await getSite();
 			<li>Personal observations shaped by legal thinking</li>
 		</ul>
 	</section>
+
+<section class="content-shell mt-12">
+  <h2 class="text-xl font-semibold mb-4">Featured</h2>
+  <a href="/blog/why-i-write-in-the-margins-of-law" class="block border rounded-lg p-6 hover:bg-[color:var(--color-surface)] transition">
+    <h3 class="text-lg font-medium">Why I Write in the Margins of Law</h3>
+    <p class="text-muted mt-2">On legal thinking, unfinished arguments, and clarity between footnotes.</p>
+  </a>
+</section>
 
 	<PostList
 		heading="Selected Writing"
