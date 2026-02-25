@@ -1,161 +1,245 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 ---
-
 <PageLayout title="Resume — Tanmay Satvik">
-<meta name="robots" content="noindex, nofollow" />
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
 
-<section class="content-shell max-w-3xl space-y-12 py-16">
+  <section class="content-shell max-w-3xl space-y-10 py-16 print:py-4">
 
-<header>
-<h1 class="text-3xl font-semibold">Tanmay Satvik</h1>
+    <header class="space-y-3">
+      <h1 class="text-3xl font-semibold">Tanmay Satvik</h1>
+      <p class="text-muted">
+        Penultimate Year · BBA LL.B (Hons.) · MAIMS, GGSIPU
+      </p>
+      <p class="text-muted">
+        Corporate Law · Contract Drafting · Arbitration · Intellectual Property
+      </p>
+      <p class="text-base leading-relaxed max-w-2xl">
+        A legal researcher and drafter with hands-on experience across arbitration chambers,
+        trademark practice, High Court internships, and transactional advisory. Interested in
+        corporate law, dispute resolution, and the intersection of drafting and strategy.
+      </p>
+      <div class="flex flex-wrap gap-4 mt-2 text-sm print:hidden">
+        <a href="https://drive.google.com/file/d/1uDF3wPhJwOJjmjMezXSqlv5lNcwfpQ3S/view"
+           target="_blank"
+           class="underline">
+          Download PDF Resume
+        </a>
+        <a href="mailto:tanmaysatvik@gmail.com" class="underline">
+          tanmaysatvik@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/tanmay-s-641a6698"
+           target="_blank"
+           class="underline">
+          LinkedIn
+        </a>
+        <a href="https://almostafootnote.pages.dev"
+           target="_blank"
+           class="underline">
+          Blog
+        </a>
+      </div>
+    </header>
 
-<p class="text-muted mt-1">
-Law Student · Arbitration · Corporate · IP · Research & Writing
-</p>
+    <hr />
 
-<p class="text-lg text-muted mt-3">
-A legal researcher and writer with hands-on experience in arbitration, compliance research, and drafting across law firms and corporate legal teams.
-</p>
+    <section class="space-y-4">
+      <h2 class="section-heading">Education</h2>
+      <div>
+        <p>
+          <strong>BBA LL.B (Hons.)</strong> —
+          Maharaja Agrasen Institute of Management Studies, GGSIPU, New Delhi
+        </p>
+        <p class="text-muted text-sm">2022–2027 · CGPA: 7.3/10 (up to Semester VI)</p>
+      </div>
+      <div>
+        <p><strong>Class XII (Science)</strong> — Chinmaya Vidyalaya, Jharkhand (CBSE)</p>
+        <p class="text-muted text-sm">2021 · 85.6%</p>
+      </div>
+      <div>
+        <p><strong>Class X</strong> — Guru Gobind Singh Public School, Jharkhand (CBSE)</p>
+        <p class="text-muted text-sm">2019 · 85%</p>
+      </div>
+    </section>
 
-<div class="flex gap-4 mt-4 text-sm">
-<a href="https://drive.google.com/file/d/FILE_ID/view" target="_blank" class="underline">View PDF</a>
-</div>
-</header>
+    <hr />
 
-<hr />
+    <section class="space-y-6">
+      <h2 class="section-heading">Internships</h2>
 
-<section>
-<h2>Education</h2>
+      <div class="space-y-1">
+        <p class="font-medium">Stellar Advisors, Delhi (Remote)</p>
+        <p class="text-muted text-sm">Oct–Nov 2025 · 4 weeks</p>
+        <ul class="resume-list">
+          <li>Conducted regulatory research on the Emigration Act and eMigrate portal; built a compliance matrix for registering a foreign recruiting agency in India.</li>
+          <li>Drafted Dealership Agreement and End-User Agreement from scratch using BaaS market precedents.</li>
+          <li>Researched cross-border business transfer involving assignment of Indian contracts and IP to a US company; analyzed FEMA constraints, novation requirements, and offshore consideration flows.</li>
+          <li>Authored article on India-entry strategies for foreign companies covering incorporation models, subsidiary structures, and GCCs.</li>
+          <li>Mapped 10+ San Francisco Bay Area law firms with India/APAC desks for strategic collaboration.</li>
+        </ul>
+      </div>
 
-<p>
-<strong>BBA LL.B (Hons.)</strong> — Maharaja Agrasen Institute of Management Studies (GGSIPU), New Delhi<br/>
-2022–2027 · CGPA: 7.3/10
-</p>
+      <div class="space-y-1">
+        <p class="font-medium">Company Vakil, Delhi (Remote)</p>
+        <p class="text-muted text-sm">May–Aug 2025 · 12 weeks</p>
+        <ul class="resume-list">
+          <li>Prepared and filed 15+ trademark applications; drafted user affidavits, Powers of Attorney, and design applications.</li>
+          <li>Drafted cease and desist notices under Section 29, Trade Marks Act, 1999.</li>
+          <li>Managed a database of 150+ objected marks under Sections 9(1)(a) and 11(1); prepared draft replies.</li>
+          <li>Conducted trademark searches across multiple classes; prepared assignment deeds for artists.</li>
+        </ul>
+      </div>
 
-<p>
-Class XII (Science): 85.6% · CBSE<br/>
-Class X: 85% · CBSE
-</p>
-</section>
+      <div class="space-y-1">
+        <p class="font-medium">Dewan & Dewan Law Chambers, Delhi (Remote)</p>
+        <p class="text-muted text-sm">Apr–Aug 2025 · 18 weeks</p>
+        <ul class="resume-list">
+          <li>Conducted arbitration research across 25+ projects covering ICC, SIAC, and investor-state disputes.</li>
+          <li>Drafted memoranda on arbitration clauses, jurisdictional challenges, and award enforcement.</li>
+          <li>Performed comparative analysis of Indian arbitration law and international frameworks.</li>
+          <li>Researched ADR mechanisms, kompetenz-kompetenz, and mediation ethics.</li>
+        </ul>
+      </div>
 
-<section>
-<h2>Internships</h2>
+      <div class="space-y-1">
+        <p class="font-medium">Judicial Internship under H.M.J Ananda Sen, Jharkhand High Court (On-site)</p>
+        <p class="text-muted text-sm">August 2025 · 4 weeks</p>
+        <ul class="resume-list">
+          <li>Observed court proceedings from the bench; gained first-hand insight into judicial reasoning and counsel arguments.</li>
+          <li>Prepared detailed synopses of four tagged matters.</li>
+          <li>Researched case law on maintainability of FIRs and conditions for registration.</li>
+          <li>Analyzed judicial contentions on litigation strategy and procedural law.</li>
+        </ul>
+      </div>
 
-<ul>
+      <div class="space-y-1">
+        <p class="font-medium">Office of the Advocate General, G.A.-I, Jharkhand High Court (On-site)</p>
+        <p class="text-muted text-sm">July 2025 · 4 weeks</p>
+        <ul class="resume-list">
+          <li>Researched Mines and Minerals Act, Electricity Act, Industrial Disputes Act, and Bihar Reorganisation Act.</li>
+          <li>Drafted counter-affidavits, case briefs, and chronologies for matters before the High Court and tribunals.</li>
+          <li>Researched mining royalties, writ petition pleadings, and employee regularization issues.</li>
+        </ul>
+      </div>
 
-<li>
-<strong>Stellar Advisors — Delhi (Remote)</strong> · Oct–Nov 2025<br/>
-Regulatory research on Emigration Act & eMigrate portal; drafted Dealership and End-User Agreements; analyzed FEMA implications in cross-border IP transfer; authored India-entry strategy article; mapped Bay Area law firms for collaboration.
-</li>
+      <div class="space-y-1">
+        <p class="font-medium">Alpha Legal Consultants, Delhi (On-site)</p>
+        <p class="text-muted text-sm">January 2025 · 4 weeks</p>
+        <ul class="resume-list">
+          <li>Drafted 10+ counter-reply affidavits before the Armed Forces Tribunal (Army Disability Pension, DSC, MACPS).</li>
+          <li>Researched precedents on OROP, pension commutation, promotions, and leave encashment.</li>
+          <li>Utilized SCC Online, e-SCR, and Indian Kanoon for defense litigation support.</li>
+        </ul>
+      </div>
 
-<li>
-<strong>Company Vakil — Delhi (Remote)</strong> · May–Aug 2025<br/>
-Filed 15+ trademark applications, drafted cease & desist notices, managed 150+ objections, prepared assignment deeds.
-</li>
+      <div class="space-y-1">
+        <p class="font-medium">Chambers of Chaitanya Singh, New Delhi (On-site)</p>
+        <p class="text-muted text-sm">July 2024 · 4 weeks</p>
+        <ul class="resume-list">
+          <li>Researched criminal and procedural law; analyzed FIR quashing under Section 14C of the Foreigners Act.</li>
+          <li>Prepared and assisted in delivering a CrPC vs. BNSS comparative presentation before Members of Parliament and senior bureaucrats.</li>
+          <li>Observed Delhi High Court proceedings including ED v. Moser Baer (PMLA); prepared detailed case notes.</li>
+          <li>Assisted with bail bond and surety applications (Form 45).</li>
+        </ul>
+      </div>
+    </section>
 
-<li>
-<strong>Dewan & Dewan Law Chambers — Delhi (Remote)</strong> · Apr–Aug 2025<br/>
-Arbitration research (ICC, SIAC, ISDS), jurisdiction memos, award enforcement analysis, ADR ethics research.
-</li>
+    <hr />
 
-<li>
-<strong>Judicial Internship — Jharkhand High Court</strong> · Aug 2025<br/>
-Bench exposure, case synopses, FIR maintainability research, litigation strategy analysis.
-</li>
+    <section class="space-y-4">
+      <h2 class="section-heading">Publications</h2>
+      <ul class="resume-list">
+        <li>Terrorism in Financial Crime by Money Laundering (Research Paper)</li>
+        <li>Law and Biotechnology: An Overview with Landmark Judgments in India — SYAR India</li>
+        <li>ED and BBC: A Chronology of Events — Vidhi Parivartan</li>
+      </ul>
+    </section>
 
-<li>
-<strong>Office of Advocate General, Jharkhand HC</strong> · Jul 2025<br/>
-Research on MMDR Act, Electricity Act, ID Act; drafted counter-affidavits and case chronologies.
-</li>
+    <hr />
 
-<li>
-<strong>Alpha Legal Consultants — Delhi</strong> · Jan 2025<br/>
-Drafted AFT pleadings; researched OROP, pension commutation, service law precedents.
-</li>
+    <section class="space-y-4">
+      <h2 class="section-heading">Certifications</h2>
+      <ul class="resume-list">
+        <li>Diploma in Advanced Contract Drafting, Negotiation and Dispute Resolution — LawSikho (2024, ongoing)</li>
+        <li>WIPO General Course on Intellectual Property (DL101E25S1) — Score: 71/100</li>
+        <li>Certificate Course on Legal Aid and Allied Laws — GNLU & Pro Bono India (2023) · Grade: B+</li>
+      </ul>
+    </section>
 
-<li>
-<strong>Chambers of Chaitanya Singh — New Delhi</strong> · Jul 2024<br/>
-Criminal procedure research, FIR quashing, CrPC vs BNSS presentation to MPs, Delhi HC observation.
-</li>
+    <hr />
 
-</ul>
-</section>
+    <section class="space-y-4">
+      <h2 class="section-heading">Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+        <div>
+          <p class="font-medium">Legal Drafting</p>
+          <p class="text-muted">Affidavits, MoUs, Arbitration Clauses, Corporate Agreements</p>
+        </div>
+        <div>
+          <p class="font-medium">Research Databases</p>
+          <p class="text-muted">SCC Online, Manupatra, Casemine, Indian Kanoon, e-SCR</p>
+        </div>
+        <div>
+          <p class="font-medium">Corporate Compliance</p>
+          <p class="text-muted">MCA, SEBI, RBI framework knowledge</p>
+        </div>
+        <div>
+          <p class="font-medium">Technical</p>
+          <p class="text-muted">MS Office, Google Suite, Canva</p>
+        </div>
+      </div>
+    </section>
 
-<section>
-<h2>Publications</h2>
+    <hr />
 
-<ul>
-<li>Terrorism in Financial Crime by Money Laundering (Research Paper)</li>
-<li>Law and Biotechnology: Landmark Judgments in India (SYAR India)</li>
-<li>ED and BBC: A Chronology of Events (Vidhi Parivartan)</li>
-</ul>
-</section>
+    <section class="space-y-4">
+      <h2 class="section-heading">Positions of Responsibility</h2>
+      <ul class="resume-list">
+        <li>Court Master (2 rounds) — NAVITAS-ADRCC 2024 Mediation Competition</li>
+        <li>Organizing Committee Member — Mediation Competition, NAVITAS Law Fest</li>
+        <li>Logistics Head — Pro Bono Club, MAIMS</li>
+      </ul>
+    </section>
 
-<section>
-<h2>Skills</h2>
+    <hr />
 
-<ul>
-<li>Legal Drafting (Affidavits, MoUs, Arbitration Clauses)</li>
-<li>Research: SCC Online, Manupatra, Casemine, Indian Kanoon</li>
-<li>Corporate Compliance: MCA, SEBI, RBI</li>
-<li>Technical: MS Office, Google Suite, Canva</li>
-</ul>
-</section>
+    <section class="space-y-4 print:hidden">
+      <h2 class="section-heading">PDF Preview</h2>
+      <iframe
+        src="https://drive.google.com/file/d/1uDF3wPhJwOJjmjMezXSqlv5lNcwfpQ3S/preview"
+        class="w-full h-[1000px] border rounded"
+        allow="autoplay"
+      ></iframe>
+    </section>
 
-<section>
-<h2>Positions of Responsibility</h2>
-
-<ul>
-<li>Court Master — NAVITAS ADRCC 2024</li>
-<li>Organizing Committee — Mediation Competition</li>
-<li>Logistics Head — Pro Bono Club, MAIMS</li>
-</ul>
-</section>
-
-<section>
-<h2>Contact</h2>
-
-<p>
-Email: tanmaysatvik@gmail.com<br/>
-LinkedIn: linkedin.com/in/tanmay-s-641a6698
-</p>
-</section>
-
-<hr />
-
-<section>
-<h2>PDF Preview</h2>
-
-<iframe
-  src="https://drive.google.com/file/d/1uDF3wPhJwOJjmjMezXSqlv5lNcwfpQ3S/preview"
-  class="w-full h-[1000px] border rounded"
-  allow="autoplay"
-></iframe>
-
-</section>
-
-</section>
+  </section>
+</PageLayout>
 
 <style>
-h2 {
-	margin-top:2rem;
-	font-weight:600;
-}
-
-ul {
-	padding-left:1rem;
-	list-style:disc;
-}
-
-li {
-	margin-bottom:1rem;
-}
-
-section > p,
-section > ul {
-	margin-bottom:1.3rem;
-}
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .resume-list {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .resume-list li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  @media print {
+    .content-shell {
+      max-width: 100%;
+      padding: 0;
+    }
+    hr {
+      margin: 1rem 0;
+    }
+  }
 </style>
-
-</PageLayout>
