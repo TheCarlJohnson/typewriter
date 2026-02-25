@@ -134,4 +134,29 @@ document.querySelectorAll(".post-article p").forEach(p=>{
 	opacity:1;
 	transform:none;
 }
+<script>
+const bar=document.getElementById('progress')
+window.addEventListener('scroll',()=>{
+ const h=document.documentElement
+ bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'
+})
+</script>
+
+<style>
+#progress{
+position:fixed;
+top:0;left:0;
+height:3px;
+background:var(--color-ink);
+width:0;
+z-index:60;
+}
+
+.post-article p:first-of-type::first-letter{
+ float:left;
+ font-size:3rem;
+ line-height:1;
+ padding-right:.2rem;
+ font-weight:600;
+}
 </style>
