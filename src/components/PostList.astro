@@ -5,43 +5,30 @@ import readingTime from 'reading-time';
 const posts = await getCollection('blog');
 ---
 
-<div class="grid gap-6 mt-12">
-{posts.map((post) => {
- const stats = readingTime(post.body || '');
+<div class="grid gap-8">
 
- return (
-  <article>
-   <a href={`/blog/${post.id}/`} class="block p-4 rounded-lg space-y-2">
+{posts.map((post) => (
+<article>
 
-    <h3>{post.data.title}</h3>
+<a href={`/blog/${post.id}/`} class="block space-y-2 group">
 
-    <p class="text-xs text-muted">{stats.text}</p>
+<h3 class="text-lg font-medium group-hover:underline">
+{post.data.title}
+</h3>
 
-    {post.data.description && (
-      <p class="text-sm text-muted">{post.data.description}</p>
-    )}
+<p class="text-xs text-muted">
+{readingTime(post.body).text}
+</p>
 
-   </a>
-  </article>
- );
-})}
+{post.data.description && (
+<p class="text-sm text-muted leading-relaxed">
+{post.data.description}
+</p>
+)}
+
+</a>
+
+</article>
+))}
+
 </div>
-
-<style>
-article {
- opacity:0;
- transform:translateY(6px);
- animation:fadeUp .6s ease forwards;
-}
-
-article a:hover {
- background:var(--color-surface);
-}
-
-@keyframes fadeUp {
- to {
-  opacity:1;
-  transform:none;
- }
-}
-</style>
