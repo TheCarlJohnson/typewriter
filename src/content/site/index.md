@@ -1,0 +1,12 @@
+---
+title: Almost a Footnote
+description: A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour.
+
+hero:
+  title: Welcome to Almost a Footnote
+  subtitle: A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour.
+
+author:
+  name: Tanmay Satvik
+  bio: Law student. Writer. Curious observer.
+---
