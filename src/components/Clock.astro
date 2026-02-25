@@ -1,108 +1,66 @@
 ---
 export interface Props {
-  timeZone?: string;
-  locale?: string;
-  hour12?: boolean;
-  showSeconds?: boolean;
+	timeZone: string;
+	label: string;
 }
 
-const {
-  timeZone = "UTC",
-  locale = "en-IN",
-  hour12 = false,
-  showSeconds = true,
-} = Astro.props as Props;
+const { timeZone, label } = Astro.props;
+
+const initial = new Intl.DateTimeFormat('en-IN', {
+	timeZone,
+	hour: '2-digit',
+	minute: '2-digit',
+	second: '2-digit',
+	hour12: false,
+	weekday: 'short',
+	day: 'numeric',
+	month: 'short',
+}).format(new Date());
 ---
 
-<span
-  class="clock font-mono tracking-wide"
-  data-timezone={timeZone}
-  data-locale={locale}
-  data-hour12={hour12}
-  data-showseconds={showSeconds}
-></span>
-
-<span
-  class="clock-date text-sm text-muted ml-2"
-  data-timezone={timeZone}
-  data-locale={locale}
-></span>
-
-<style>
-  .blink {
-    animation: blink 1s steps(1) infinite;
-  }
-
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
-
-  .clock {
-    transition: opacity 0.25s ease;
-  }
-</style>
+<div class="clock-block" data-tz={timeZone}>
+	<span class="clock-label">{label}</span>
+	<span class="clock-time">{initial}</span>
+</div>
 
 <script>
-  const clocks = document.querySelectorAll(".clock");
-  const dates = document.querySelectorAll(".clock-date");
+const blocks = document.querySelectorAll('.clock-block');
 
-  const formatTime = (date, { locale, timeZone, hour12, showSeconds }) => {
-    const options = {
-      timeZone,
-      hour: "2-digit",
-      minute: "2-digit",
-      ...(showSeconds ? { second: "2-digit" } : {}),
-      hour12,
-    };
+const format = (d, tz) =>
+	new Intl.DateTimeFormat('en-IN', {
+		timeZone: tz,
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+		hour12: false,
+		weekday: 'short',
+		day: 'numeric',
+		month: 'short',
+	}).format(d);
 
-    let formatted = new Intl.DateTimeFormat(locale, options).format(date);
+blocks.forEach(el => {
+	const tz = el.dataset.tz;
+	const time = el.querySelector('.clock-time');
 
-    // blinking colon
-    formatted = formatted.replace(/:/g, '<span class="blink">:</span>');
+	const update = () => {
+		time.textContent = format(new Date(), tz);
+	};
 
-    return formatted;
-  };
-
-  const formatDate = (date, { locale, timeZone }) => {
-    return new Intl.DateTimeFormat(locale, {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      timeZone,
-    }).format(date);
-  };
-
-  clocks.forEach((el, index) => {
-    const timeZone = el.dataset.timezone || "UTC";
-    const locale = el.dataset.locale || "en-IN";
-    const hour12 = el.dataset.hour12 === "true";
-    const showSeconds = el.dataset.showseconds === "true";
-
-    const dateEl = dates[index];
-
-    const update = () => {
-      const now = new Date();
-
-      el.innerHTML = formatTime(now, {
-        locale,
-        timeZone,
-        hour12,
-        showSeconds,
-      });
-
-      if (dateEl) {
-        dateEl.textContent = formatDate(now, { locale, timeZone });
-      }
-
-      // subtle fade tick
-      el.style.opacity = "0.6";
-      setTimeout(() => (el.style.opacity = "1"), 150);
-    };
-
-    update();
-    setInterval(update, 1000);
-  });
+	update();
+	setInterval(update, 1000);
+});
 </script>
+
+<style>
+.clock-block{
+display:flex;
+gap:.4rem;
+align-items:center;
+font-size:.9rem;
+opacity:.85;
+}
+
+.clock-label{
+font-weight:600;
+}
+</style>
