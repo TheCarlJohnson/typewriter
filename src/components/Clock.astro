@@ -18,7 +18,7 @@ const initial = new Intl.DateTimeFormat('en-IN', {
 }).format(new Date());
 ---
 
-<div class="clock-block" data-tz={timeZone}>
+<div class="clock-block" data-tz={timeZone} title={timeZone}>
 	<span class="clock-label">{label}</span>
 	<span class="clock-time">{initial}</span>
 </div>
@@ -54,13 +54,27 @@ blocks.forEach(el => {
 <style>
 .clock-block{
 display:flex;
-gap:.4rem;
+gap:.35rem;
 align-items:center;
-font-size:.9rem;
+font-size:.85rem;
 opacity:.85;
 }
 
 .clock-label{
 font-weight:600;
+}
+
+.clock-dot{
+opacity:.4;
+margin:0 .4rem;
+}
+
+.fade-in{
+animation:fade .6s ease forwards;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(4px)}
+to{opacity:.85;transform:none}
 }
 </style>
