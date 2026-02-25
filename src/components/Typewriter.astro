@@ -50,66 +50,66 @@ const durationAttr = formatDuration(duration);
 
 <script>
 	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { TextPlugin } from "gsap/TextPlugin";
+	gsap.registerPlugin(TextPlugin);
 
-	gsap.registerPlugin(ScrollTrigger, TextPlugin);
+	function initTypewriters() {
+		const containers = document.querySelectorAll("[data-typewriter]");
+		for (const container of containers) {
+			const target = container.querySelector(".typing_text");
+			if (!target) continue;
+			if (container.dataset.typewriterInit === "true") continue;
+			container.dataset.typewriterInit = "true";
 
-	const containers = document.querySelectorAll<HTMLElement>("[data-typewriter]");
-	for (const container of containers) {
-		const target = container.querySelector<HTMLElement>(".typing_text");
-		if (!target) continue;
-		if (container.dataset.typewriterInit === "true") continue;
-		container.dataset.typewriterInit = "true";
+			const text = container.getAttribute("data-text") ?? "";
+			const durationAttr = container.getAttribute("data-duration");
+			const autoStartAttr = container.getAttribute("data-autostart");
+			const scrubAttr = container.getAttribute("data-scrub");
+			const start = container.getAttribute("data-start") ?? "center center";
+			const end = container.getAttribute("data-end") ?? "center center";
+			const markers = container.getAttribute("data-markers") === "true";
 
-		const value = container.getAttribute("data-text") ?? "";
-		const markers = container.getAttribute("data-markers") === "true";
-		const start = container.getAttribute("data-start") ?? "center center";
-		const end = container.getAttribute("data-end") ?? "center center";
-		const scrubAttr = container.getAttribute("data-scrub");
-		const durationAttr = container.getAttribute("data-duration");
-		const autoStartAttr = container.getAttribute("data-autostart");
+			const duration = durationAttr ? Number(durationAttr) : 2;
+			const shouldAutoStart = autoStartAttr === "true";
 
-		let scrub: boolean | number | undefined;
-		if (scrubAttr !== null) {
-			if (scrubAttr === "true") scrub = true;
-			else if (scrubAttr === "false") scrub = false;
-			else {
-				const parsed = Number(scrubAttr);
-				scrub = Number.isNaN(parsed) ? undefined : parsed;
+			let scrub: boolean | number | undefined;
+			if (scrubAttr !== null) {
+				if (scrubAttr === "true") scrub = true;
+				else if (scrubAttr === "false") scrub = false;
+				else {
+					const parsed = Number(scrubAttr);
+					scrub = Number.isNaN(parsed) ? undefined : parsed;
+				}
 			}
+
+			const tweenConfig = {
+				duration,
+				text: { value: text },
+			};
+
+			if (shouldAutoStart) {
+				gsap.to(target, tweenConfig);
+				continue;
+			}
+
+			const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+			gsap.registerPlugin(ScrollTrigger);
+
+			gsap.to(target, {
+				...tweenConfig,
+				scrollTrigger: {
+					trigger: container,
+					start,
+					end,
+					scrub,
+					markers,
+					scroller: document.scrollingElement || document.documentElement,
+				},
+			});
 		}
-
-		let durationValue: number | undefined;
-		if (durationAttr !== null) {
-			const parsed = Number(durationAttr);
-			durationValue = Number.isNaN(parsed) ? undefined : parsed;
-		}
-
-		const shouldAutoStart = autoStartAttr === "true";
-
-		const tweenConfig = {
-			duration: durationValue ?? 10,
-			text: { value },
-		};
-
-		if (shouldAutoStart) {
-			gsap.to(target, tweenConfig);
-			continue;
-		}
-
-		gsap.to(target, {
-			...tweenConfig,
-			scrollTrigger: {
-				trigger: container,
-				start,
-				end,
-				scrub,
-				markers,
-				scroller: document.scrollingElement || document.documentElement,
-			},
-		});
 	}
+
+	document.addEventListener("DOMContentLoaded", initTypewriters);
 </script>
 
 <style>
