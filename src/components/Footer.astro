@@ -81,18 +81,35 @@ const iconMap: Record<string, string> = {
       <div class="md:text-right space-y-2 md:space-y-1">
 
         <div class="flex flex-wrap items-center gap-3 md:justify-end">
-          <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink m-0">
-            India (IST)
-          </p>
+        <div id="world-clocks" class="flex flex-wrap items-center gap-3 md:justify-end">
 
-          <Clock
-            timeZone="Asia/Kolkata"
-            locale="en-IN"
-            hour12={false}
-            showSeconds={true}
-          />
+	<Clock label="India" timeZone="Asia/Kolkata" />
 
-          <AmbientToggle />
+	<span id="clock-dot" class="clock-dot hidden">•</span>
+
+	<div id="local-clock"></div>
+
+	<AmbientToggle />
+
+</div>
+
+<script>
+const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+if(localTZ !== "Asia/Kolkata"){
+	const holder = document.getElementById('local-clock');
+	const dot = document.getElementById('clock-dot');
+
+	holder.innerHTML = `
+		<div class="clock-block fade-in" data-tz="${localTZ}" title="${localTZ}">
+			<span class="clock-label">You</span>
+			<span class="clock-time"></span>
+		</div>
+	`;
+
+	dot.classList.remove('hidden');
+}
+</script>
         </div>
 
       </div>
