@@ -5,43 +5,43 @@ import readingTime from 'reading-time';
 const posts = await getCollection('blog');
 ---
 
-<div class="grid gap-6">
-  {posts.map((post) => {
-    const stats = readingTime(post.body || '');
+<div class="grid gap-6 mt-12">
+{posts.map((post) => {
+ const stats = readingTime(post.body || '');
 
-    return (
-      <article>
-        <a href={`/blog/${post.id}/`} class="block space-y-1">
+ return (
+  <article>
+   <a href={`/blog/${post.id}/`} class="block p-4 rounded-lg space-y-2">
 
-          <h3>{post.data.title}</h3>
+    <h3>{post.data.title}</h3>
 
-          <p class="text-xs text-muted mt-1">
-            {stats.text}
-          </p>
+    <p class="text-xs text-muted">{stats.text}</p>
 
-          {post.data.description && (
-            <p class="text-sm text-muted">
-              {post.data.description}
-            </p>
-          )}
+    {post.data.description && (
+      <p class="text-sm text-muted">{post.data.description}</p>
+    )}
 
-        </a>
-      </article>
-    );
-  })}
+   </a>
+  </article>
+ );
+})}
 </div>
 
 <style>
 article {
-  opacity: 0;
-  transform: translateY(6px);
-  animation: fadeUp .6s ease forwards;
+ opacity:0;
+ transform:translateY(6px);
+ animation:fadeUp .6s ease forwards;
+}
+
+article a:hover {
+ background:var(--color-surface);
 }
 
 @keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: none;
-  }
+ to {
+  opacity:1;
+  transform:none;
+ }
 }
 </style>
