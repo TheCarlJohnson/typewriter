@@ -44,10 +44,7 @@ const next = currentIndex > 0 ? sorted[currentIndex - 1] : null;
       {tags.length > 0 && (
         <div class="flex flex-wrap gap-2">
           {tags.map(tag => (
-            
-              href={withBase(`/tags/${slugify(tag)}/`)}
-              class="text-xs font-mono uppercase tracking-widest text-muted border border-[color:var(--color-border)] px-2 py-0.5 no-underline hover:text-[color:var(--color-ink)] hover:border-[color:var(--color-ink)] transition-colors"
-            >
+            <a href={withBase(`/tags/${slugify(tag)}/`)} class="post-tag">
               {tag}
             </a>
           ))}
@@ -67,24 +64,20 @@ const next = currentIndex > 0 ? sorted[currentIndex - 1] : null;
       </Prose>
     </section>
 
-    <nav class="mt-16 pt-8 border-t border-[color:var(--color-border)] grid grid-cols-2 gap-4 text-sm">
+    <nav class="post-nav">
       <div>
         {prev && (
-          <a href={withBase(`/blog/${prev.id}/`)} class="group no-underline space-y-1">
-            <p class="eyebrow m-0">Previous</p>
-            <p class="m-0 font-medium group-hover:text-[color:var(--color-accent)] transition-colors">
-              {prev.data.title}
-            </p>
+          <a href={withBase(`/blog/${prev.id}/`)} class="post-nav-link">
+            <span class="eyebrow">Previous</span>
+            <span class="post-nav-title">{prev.data.title}</span>
           </a>
         )}
       </div>
       <div class="text-right">
         {next && (
-          <a href={withBase(`/blog/${next.id}/`)} class="group no-underline space-y-1">
-            <p class="eyebrow m-0">Next</p>
-            <p class="m-0 font-medium group-hover:text-[color:var(--color-accent)] transition-colors">
-              {next.data.title}
-            </p>
+          <a href={withBase(`/blog/${next.id}/`)} class="post-nav-link">
+            <span class="eyebrow">Next</span>
+            <span class="post-nav-title">{next.data.title}</span>
           </a>
         )}
       </div>
@@ -102,4 +95,94 @@ window.addEventListener("scroll", () => {
     (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
 });
 const paras = document.querySelectorAll(".post-article p");
-const obs = new Inters
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add("visible");
+  });
+});
+paras.forEach(p => {
+  p.classList.add("fade");
+  obs.observe(p);
+});
+</script>
+
+<style>
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-ink);
+  width: 0%;
+  z-index: 90;
+  opacity: 0.6;
+}
+.post {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+.post h1,
+.post h2,
+.post h3 {
+  margin-top: 2.2em;
+}
+.post p {
+  margin: 1.2em 0;
+}
+.post-article p:first-of-type::first-letter {
+  float: left;
+  font-size: 3rem;
+  line-height: 1;
+  padding-right: 0.3rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+.post-tag {
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.5rem;
+  text-decoration: none;
+  transition: color 140ms ease, border-color 140ms ease;
+}
+.post-tag:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+.post-nav {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.post-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+.post-nav-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  transition: color 140ms ease;
+}
+.post-nav-link:hover .post-nav-title {
+  color: var(--color-accent);
+}
+.fade {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: 0.5s ease;
+}
+.fade.visible {
+  opacity: 1;
+  transform: none;
+}
+</style>
