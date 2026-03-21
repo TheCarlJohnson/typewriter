@@ -8,29 +8,21 @@ const sorted = posts.sort((a, b) => {
   return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
 });
 ---
-<div class="grid gap-8">
-{sorted.map((post) => (
-  <article>
-    <a href={`/blog/${post.id}/`} class="block space-y-2 group">
-      <div class="flex items-center gap-2">
-        <h3 class="text-lg font-medium group-hover:underline">
-          {post.data.title}
-        </h3>
-        {post.data.featured && (
-          <span class="text-xs uppercase tracking-widest text-muted border px-1.5 py-0.5 rounded">
-            Pinned
-          </span>
-        )}
-      </div>
-      <p class="text-xs text-muted">
+<div>
+  {sorted.map((post) => (
+    <article class="post-list-item">
+      <div class="post-list-meta">
+        {new Date(post.data.pubDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
+        &nbsp;·&nbsp;
         {readingTime(post.body ?? '').text}
-      </p>
+        {post.data.featured && <>&nbsp;·&nbsp;<span>Pinned</span></>}
+      </div>
+      <h3>
+        <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+      </h3>
       {post.data.description && (
-        <p class="text-sm text-muted leading-relaxed">
-          {post.data.description}
-        </p>
+        <p class="post-list-description">{post.data.description}</p>
       )}
-    </a>
-  </article>
-))}
+    </article>
+  ))}
 </div>
