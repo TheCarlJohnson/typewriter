@@ -1,77 +1,99 @@
-<button id="ambient-toggle" class="ambient-btn">
-  ◯ Ambient
+<button
+	id="ambient-toggle"
+	class="ambient-btn"
+	aria-label="Toggle ambient sound"
+	aria-pressed="false"
+	title="Toggle soft background noise"
+>
+	<span class="ambient-icon">◯</span>
+	<span class="ambient-label">Ambient</span>
 </button>
-
 <style>
 .ambient-btn {
-  font-size: 0.8rem;
-  opacity: 0.6;
-  background: none;
-  border: none;
-  cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	font-size: 0.65rem;
+	font-family: var(--font-mono, monospace);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	opacity: 0.55;
+	background: none;
+	border: 1px solid transparent;
+	cursor: pointer;
+	color: inherit;
+	padding: 0.2rem 0.5rem;
+	border-radius: 2px;
+	transition: opacity 150ms ease, border-color 150ms ease;
 }
-
-.ambient-on {
-  opacity: 1;
+.ambient-btn:hover {
+	opacity: 0.9;
+	border-color: var(--color-border, rgba(0,0,0,0.12));
+}
+.ambient-btn[aria-pressed="true"] {
+	opacity: 1;
+	border-color: var(--color-border, rgba(0,0,0,0.12));
 }
 </style>
-
 <script>
-let ctx;
-let source;
-let gain;
+function initAmbient() {
+	let ctx: AudioContext | null = null;
+	let source: AudioBufferSourceNode | null = null;
+	const btn = document.getElementById('ambient-toggle');
+	if (!btn) return;
+	const icon = btn.querySelector('.ambient-icon');
+	const label = btn.querySelector('.ambient-label');
 
-const btn = document.getElementById("ambient-toggle");
+	function createNoise() {
+		ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+		const bufferSize = 2 * ctx.sampleRate;
+		const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+		const output = noiseBuffer.getChannelData(0);
+		let lastOut = 0;
+		for (let i = 0; i < bufferSize; i++) {
+			const white = Math.random() * 2 - 1;
+			output[i] = (lastOut + 0.02 * white) / 1.02;
+			lastOut = output[i];
+			output[i] *= 0.3;
+		}
+		source = ctx.createBufferSource();
+		source.buffer = noiseBuffer;
+		source.loop = true;
+		const gain = ctx.createGain();
+		gain.gain.value = 0.05;
+		source.connect(gain);
+		gain.connect(ctx.destination);
+	}
 
-function createNoise() {
-  ctx = new (window.AudioContext || window.webkitAudioContext)();
+	function turnOn() {
+		createNoise();
+		source!.start();
+		localStorage.setItem('ambient', 'on');
+		if (icon) icon.textContent = '●';
+		if (label) label.textContent = 'Ambient · on';
+		btn.setAttribute('aria-pressed', 'true');
+	}
 
-  const bufferSize = 2 * ctx.sampleRate;
-  const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-  const output = noiseBuffer.getChannelData(0);
+	function turnOff() {
+		if (ctx) { ctx.close(); ctx = null; }
+		localStorage.setItem('ambient', 'off');
+		if (icon) icon.textContent = '◯';
+		if (label) label.textContent = 'Ambient';
+		btn.setAttribute('aria-pressed', 'false');
+	}
 
-  // Pink-ish noise (much softer than white)
-  let lastOut = 0;
-  for (let i = 0; i < bufferSize; i++) {
-    const white = Math.random() * 2 - 1;
-    output[i] = (lastOut + 0.02 * white) / 1.02;
-    lastOut = output[i];
-    output[i] *= 0.3;
-  }
+	if (localStorage.getItem('ambient') === 'on') {
+		turnOn();
+	}
 
-  source = ctx.createBufferSource();
-  source.buffer = noiseBuffer;
-  source.loop = true;
-
-  gain = ctx.createGain();
-  gain.gain.value = 0.05; // VERY subtle
-
-  source.connect(gain);
-  gain.connect(ctx.destination);
+	btn.addEventListener('click', () => {
+		if (!ctx) { turnOn(); } else { turnOff(); }
+	});
 }
 
-const saved = localStorage.getItem("ambient");
-
-if (saved === "on") {
-  createNoise();
-  source.start();
-  btn.textContent = "● Ambient";
-  btn.classList.add("ambient-on");
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initAmbient);
+} else {
+	initAmbient();
 }
-
-btn.addEventListener("click", () => {
-  if (!ctx) {
-    createNoise();
-    source.start();
-    localStorage.setItem("ambient", "on");
-    btn.textContent = "● Ambient";
-    btn.classList.add("ambient-on");
-  } else {
-    ctx.close();
-    ctx = null;
-    localStorage.setItem("ambient", "off");
-    btn.textContent = "◯ Ambient";
-    btn.classList.remove("ambient-on");
-  }
-});
 </script>
