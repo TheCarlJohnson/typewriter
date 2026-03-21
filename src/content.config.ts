@@ -17,24 +17,7 @@ const blog = defineCollection({
 
 const site = defineCollection({
 	loader: file('src/config.yml'),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		hero: z.object({
-			title: z.string(),
-			subtitle: z.string(),
-		}).optional(),
-		author: z.object({
-			name: z.string(),
-			bio: z.string().optional(),
-			avatar: z.string().optional(),
-			socials: z.array(z.object({
-				id: z.string(),
-				label: z.string(),
-				href: z.string(),
-			})).optional(),
-		}).optional(),
-	}),
+	schema: z.record(z.string(), z.any()),
 });
 
 export const collections = { blog, site };
