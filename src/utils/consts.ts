@@ -1,13 +1,20 @@
 import { getEntry } from 'astro:content';
 export async function getSite() {
-	const siteEntry = await getEntry('site', 'site');
-	const authorEntry = await getEntry('site', 'author');
-	const siteData = siteEntry?.data?.site ?? siteEntry?.data;
-	const authorData = authorEntry?.data?.author ?? authorEntry?.data;
-	return {
-		title: siteData?.title,
-		description: siteData?.description,
-		hero: siteData?.hero,
-		author: authorData,
-	};
+	try {
+		const siteEntry = await getEntry('site', 'site');
+		const authorEntry = await getEntry('site', 'author');
+		return {
+			title: siteEntry?.data?.title ?? 'Almost a Footnote',
+			description: siteEntry?.data?.description ?? '',
+			hero: siteEntry?.data?.hero ?? null,
+			author: authorEntry?.data ?? null,
+		};
+	} catch {
+		return {
+			title: 'Almost a Footnote',
+			description: 'Legal reasoning, personal reflection, and the occasional science-backed detour.',
+			hero: null,
+			author: null,
+		};
+	}
 }
