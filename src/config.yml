@@ -1,9 +1,8 @@
-site:
+title: Almost a Footnote
+description: A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour.
+hero:
   title: Almost a Footnote
-  description: A quiet space for thinking in public — blending legal reasoning, personal reflection, and the occasional science-backed detour.
-  hero:
-    title: Almost a Footnote
-    subtitle: Legal reasoning, personal reflection, and the occasional science-backed detour.
+  subtitle: Legal reasoning, personal reflection, and the occasional science-backed detour.
 author:
   name: Tanmay Satvik
   bio: Penultimate year law student. Writing about corporate law, arbitration, and the spaces between what the law says and what it means.
