@@ -1,119 +1,37 @@
 ---
 import { getSite } from '../utils/consts';
-import { Icon } from 'astro-icon/components';
 import Clock from './Clock.astro';
 import AmbientToggle from './AmbientToggle.astro';
-
 const site = await getSite();
 const today = new Date();
-const socials = site.author?.socials || [];
-
-const iconMap: Record<string, string> = {
-  x: 'tabler:brand-x',
-  twitter: 'tabler:brand-x',
-  github: 'tabler:brand-github',
-  linkedin: 'tabler:brand-linkedin',
-  email: 'tabler:mail',
-  mastodon: 'tabler:brand-mastodon',
-};
 ---
-
-<footer class="border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-8">
+<footer class="border-t border-[color:var(--color-border)] mt-16 py-8">
   <div class="content-shell">
 
-    <div class="grid gap-10 border-b border-[color:var(--color-border)] pb-10 md:grid-cols-2">
+    <div class="flex flex-wrap items-start justify-between gap-8 border-b border-[color:var(--color-border)] pb-8">
 
-      <div class="grid gap-3">
-        <p class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Connect</p>
-
-        <div class="grid gap-2 sm:grid-cols-2 text-sm text-muted">
-          {socials.map((social) => {
-            const iconName = social.id ? iconMap[social.id.toLowerCase()] : undefined;
-            const fallback = social.label?.trim()?.[0]?.toUpperCase() ?? '?';
-
-            return (
-              <a
-                href={social.href}
-                target={social.href.startsWith('http') ? '_blank' : undefined}
-                rel={social.href.startsWith('http') ? 'noreferrer' : undefined}
-                class="flex items-center gap-2 rounded-md px-2 py-1 transition-colors hover:text-ink hover:bg-[color:color-mix(in_oklab,var(--color-ink)_3%,transparent)]"
-              >
-                {iconName ? (
-                  <Icon
-                    name={iconName}
-                    size={18}
-                    strokeWidth={1.5}
-                    class="text-ink"
-                    aria-hidden={true}
-                  />
-                ) : (
-                  <span class="inline-flex h-[26px] w-[26px] items-center justify-center rounded-full border border-[color:var(--color-border)] text-[0.7rem] font-semibold text-ink">
-                    {fallback}
-                  </span>
-                )}
-
-                <span class="leading-tight">{social.label}</span>
-              </a>
-            );
-          })}
+      <div class="space-y-3">
+        <p class="eyebrow">Navigation</p>
+        <div class="flex flex-col gap-1.5 text-sm text-muted">
+          <a class="hover:text-[color:var(--color-ink)] transition-colors" href="/">Home</a>
+          <a class="hover:text-[color:var(--color-ink)] transition-colors" href="/blog">Blog</a>
+          <a class="hover:text-[color:var(--color-ink)] transition-colors" href="/about">About</a>
+          <a class="hover:text-[color:var(--color-ink)] transition-colors" href="/rss.xml">RSS</a>
         </div>
       </div>
 
-      <div class="grid gap-3">
-        <p class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Navigation</p>
-
-        <div class="grid gap-2 sm:grid-cols-2 text-sm text-muted">
-          <a class="transition-colors hover:text-ink" href="/">Home</a>
-          <a class="transition-colors hover:text-ink" href="/blog">Blog</a>
-          <a class="transition-colors hover:text-ink" href="/about">About</a>
-          <a class="transition-colors hover:text-ink" href="/rss.xml">RSS</a>
+      <div class="space-y-3 text-right">
+        <p class="eyebrow">Where I am</p>
+        <div class="flex flex-wrap items-center gap-3 justify-end">
+          <Clock label="India" timeZone="Asia/Kolkata" />
         </div>
       </div>
 
     </div>
 
-    <div class="grid gap-6 pt-8 pb-4 md:flex md:items-center md:justify-between">
-
-      <p class="text-sm text-muted m-0">
-        © {today.getFullYear()} Tanmay · Almost a Footnote
-      </p>
-
-      <div class="md:text-right space-y-2 md:space-y-1">
-
-        <div class="flex flex-wrap items-center gap-3 md:justify-end">
-        <div id="world-clocks" class="flex flex-wrap items-center gap-3 md:justify-end">
-
-	<Clock label="India" timeZone="Asia/Kolkata" />
-
-	<span id="clock-dot" class="clock-dot hidden">•</span>
-
-	<div id="local-clock"></div>
-
-	<AmbientToggle />
-
-</div>
-
-<script>
-const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-if(localTZ !== "Asia/Kolkata"){
-	const holder = document.getElementById('local-clock');
-	const dot = document.getElementById('clock-dot');
-
-	holder.innerHTML = `
-		<div class="clock-block fade-in" data-tz="${localTZ}" title="${localTZ}">
-			<span class="clock-label">You</span>
-			<span class="clock-time"></span>
-		</div>
-	`;
-
-	dot.classList.remove('hidden');
-}
-</script>
-        </div>
-
-      </div>
-
+    <div class="flex flex-wrap items-center justify-between gap-4 pt-6 text-xs text-muted">
+      <p class="m-0">© {today.getFullYear()} Tanmay · Almost a Footnote</p>
+      <AmbientToggle />
     </div>
 
   </div>
