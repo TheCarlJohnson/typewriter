@@ -3,10 +3,9 @@ import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import PostList from '../components/PostList.astro';
-import { getSite } from '../utils/consts';
 import { getCollection } from 'astro:content';
 import readingTime from 'reading-time';
-const site = await getSite();
+
 const posts = await getCollection('blog');
 const sorted = posts.sort((a, b) => {
   if (a.data.featured && !b.data.featured) return -1;
@@ -15,40 +14,35 @@ const sorted = posts.sort((a, b) => {
 });
 const featured = sorted[0];
 ---
-<PageLayout title={site.title}>
+<PageLayout title="Almost a Footnote">
   <Hero
-    title={site.hero?.title}
-    description={site.hero?.subtitle}
+    title="Almost a Footnote"
+    description="Legal reasoning, personal reflection, and the occasional science-backed detour."
     actions={[
       { label: "Start Reading", href: "/blog", variant: "primary" },
       { label: "About Me", href: "/about", variant: "secondary" }
     ]}
   />
-
   {featured && (
-    <section class="content-shell mt-16 space-y-4 border-b pb-12">
-      <p class="text-xs uppercase tracking-widest text-muted">
-        Featured Writing
-      </p>
-      <a href={`/blog/${featured.id}/`}
-        class="block space-y-3 rounded-lg border p-6 hover:bg-[color:var(--color-surface)] transition"
-      >
-        <h2 class="text-2xl font-semibold">
-          {featured.data.title}
-        </h2>
-        <p class="text-xs text-muted">
+    <section class="content-shell pt-10 pb-10 border-b border-[color:var(--color-border)]">
+      <p class="eyebrow mb-4">Featured Writing</p>
+      <a href={`/blog/${featured.id}/`} class="featured-post group block">
+        <h2 class="m-0 mb-2">{featured.data.title}</h2>
+        <p class="text-xs font-mono uppercase tracking-widest text-muted mb-3">
           {readingTime(featured.body ?? '').text}
         </p>
-        <p class="text-muted">
+        <p class="text-muted text-base leading-relaxed m-0">
           {featured.data.description}
         </p>
       </a>
     </section>
   )}
-
-  <About author={site.author} />
-
-  <section class="content-shell mt-16">
+  <About author={{
+    name: "Tanmay Satvik",
+    bio: "Penultimate year law student. Writing about corporate law, arbitration, and the spaces between what the law says and what it means."
+  }} />
+  <section class="content-shell mt-10 mb-16">
+    <p class="eyebrow mb-6">All Writing</p>
     <PostList />
   </section>
 </PageLayout>
