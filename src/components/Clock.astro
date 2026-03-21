@@ -3,9 +3,7 @@ export interface Props {
 	timeZone: string;
 	label: string;
 }
-
 const { timeZone, label } = Astro.props;
-
 const initial = new Intl.DateTimeFormat('en-IN', {
 	timeZone,
 	hour: '2-digit',
@@ -17,64 +15,53 @@ const initial = new Intl.DateTimeFormat('en-IN', {
 	month: 'short',
 }).format(new Date());
 ---
-
-<div class="clock-block" data-tz={timeZone} title={timeZone}>
+<div class="clock-block" data-tz={timeZone}>
 	<span class="clock-label">{label}</span>
 	<span class="clock-time">{initial}</span>
 </div>
-
-<script>
-const blocks = document.querySelectorAll('.clock-block');
-
-const format = (d, tz) =>
-	new Intl.DateTimeFormat('en-IN', {
-		timeZone: tz,
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit',
-		hour12: false,
-		weekday: 'short',
-		day: 'numeric',
-		month: 'short',
-	}).format(d);
-
-blocks.forEach(el => {
-	const tz = el.dataset.tz;
-	const time = el.querySelector('.clock-time');
-
-	const update = () => {
-		time.textContent = format(new Date(), tz);
-	};
-
-	update();
-	setInterval(update, 1000);
-});
-</script>
-
 <style>
-.clock-block{
-display:flex;
-gap:.35rem;
-align-items:center;
-font-size:.85rem;
-opacity:.85;
+.clock-block {
+	display: flex;
+	gap: 0.35rem;
+	align-items: center;
+	font-size: 0.78rem;
+	opacity: 0.7;
+	font-family: var(--font-mono, monospace);
 }
-
-.clock-label{
-font-weight:600;
-}
-
-.clock-dot{
-opacity:.4;
-margin:0 .4rem;
-}
-
-.fade-in{
-animation:fade .6s ease forwards;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(4px)}
-to{opacity:.85;transform:none}
+.clock-label {
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.65rem;
 }
 </style>
+<script>
+function startClocks() {
+	const blocks = document.querySelectorAll('.clock-block');
+	const format = (d: Date, tz: string) =>
+		new Intl.DateTimeFormat('en-IN', {
+			timeZone: tz,
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit',
+			hour12: false,
+			weekday: 'short',
+			day: 'numeric',
+			month: 'short',
+		}).format(d);
+	blocks.forEach((el) => {
+		const tz = (el as HTMLElement).dataset.tz;
+		if (!tz) return;
+		const time = el.querySelector('.clock-time');
+		if (!time) return;
+		const update = () => { time.textContent = format(new Date(), tz); };
+		update();
+		setInterval(update, 1000);
+	});
+}
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', startClocks);
+} else {
+	startClocks();
+}
+</script>
