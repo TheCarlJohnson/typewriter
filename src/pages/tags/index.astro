@@ -1,46 +1,49 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import PostList from '../components/PostList.astro';
-import { getSite } from '../utils/consts';
 import { getCollection } from 'astro:content';
-import readingTime from 'reading-time';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getSite } from '../../utils/consts';
+import { slugify, withBase } from '../../utils/slugify';
 const site = await getSite();
 const posts = await getCollection('blog');
-const sorted = posts.sort((a, b) => {
-  if (a.data.featured && !b.data.featured) return -1;
-  if (!a.data.featured && b.data.featured) return 1;
-  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+const tags = new Map<string, string>();
+posts.forEach((post) => {
+	(post.data.tags ?? []).forEach((tag) => {
+		tags.set(slugify(tag), tag);
+	});
 });
-const featured = sorted[0];
+const tagList = Array.from(tags.entries()).sort((a, b) => a[1].localeCompare(b[1]));
 ---
-<PageLayout title={site.title}>
-  <Hero
-    title={site.hero?.title}
-    description={site.hero?.subtitle}
-    actions={[
-      { label: "Start Reading", href: "/blog", variant: "primary" },
-      { label: "About Me", href: "/about", variant: "secondary" }
-    ]}
-  />
-  {featured && (
-    <section class="content-shell pt-10 pb-10 border-b border-[color:var(--color-border)]">
-      <p class="eyebrow mb-4">Featured Writing</p>
-      <a href={`/blog/${featured.id}/`} class="featured-post group block">
-        <h2 class="m-0 mb-2">{featured.data.title}</h2>
-        <p class="text-xs font-mono uppercase tracking-widest text-muted mb-3">
-          {readingTime(featured.body ?? '').text}
-        </p>
-        <p class="text-muted text-base leading-relaxed m-0">
-          {featured.data.description}
-        </p>
-      </a>
-    </section>
-  )}
-  <About author={site.author} />
-  <section class="content-shell mt-10 mb-16">
-    <p class="eyebrow mb-6">All Writing</p>
-    <PostList />
-  </section>
+<PageLayout title={`Tags · ${site.title}`} description="Browse all tags">
+	<section class="content-shell py-12 space-y-8">
+		<header class="space-y-2 border-b border-[color:var(--color-border)] pb-6">
+			<p class="eyebrow">Tags</p>
+			<h1 class="text-3xl font-semibold">All Tags</h1>
+			<p class="text-muted text-sm">{tagList.length} {tagList.length === 1 ? 'tag' : 'tags'}</p>
+		</header>
+		<div class="flex flex-wrap gap-3">
+			{tagList.map(([slug, label]) => (
+				<a href={withBase(`/tags/${slug}/`)} class="post-tag">
+					{label}
+				</a>
+			))}
+		</div>
+	</section>
 </PageLayout>
+
+<style>
+.post-tag {
+	font-size: 0.65rem;
+	font-family: var(--font-mono, monospace);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--color-muted);
+	border: 1px solid var(--color-border);
+	padding: 0.15rem 0.5rem;
+	text-decoration: none;
+	transition: color 140ms ease, border-color 140ms ease;
+}
+.post-tag:hover {
+	color: var(--color-ink);
+	border-color: var(--color-ink);
+}
+</style>
