@@ -13,13 +13,15 @@ interface Props {
 import { withBase } from '../utils/slugify';
 const { eyebrow, title, description, actions = [] } = Astro.props;
 ---
-<section class="content-shell">
-  <div class="hero">
+<section class="content-shell pt-16 pb-8 border-b border-[color:var(--color-border)]">
+  <div class="max-w-2xl space-y-4">
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
-    <h1>{title}</h1>
-    {description && <p>{description}</p>}
+    <h1 class="m-0">{title}</h1>
+    {description && (
+      <p class="text-muted text-base leading-relaxed max-w-xl m-0">{description}</p>
+    )}
     {actions.length > 0 && (
-      <div class="flex flex-wrap gap-3 mt-6">
+      <div class="flex flex-wrap gap-3 pt-2">
         {actions.map((action) => (
           <a class={`button ${action.variant ?? 'primary'}`} href={withBase(action.href)}>
             {action.label}
