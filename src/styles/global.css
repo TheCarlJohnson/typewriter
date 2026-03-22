@@ -404,3 +404,15 @@ hr {
   letter-spacing: 0.08em;
   font-size: 0.62rem;
 }
+/* Drop cap — HLR style */
+.drop-cap-section p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.82;
+  padding-right: 0.12em;
+  padding-top: 0.05em;
+  color: var(--color-accent);
+  font-style: normal;
+}
