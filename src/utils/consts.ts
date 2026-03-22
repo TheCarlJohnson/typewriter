@@ -1,13 +1,12 @@
 import { getEntry } from 'astro:content';
 export async function getSite() {
 	try {
-		const siteEntry = await getEntry('site', 'site');
-		const authorEntry = await getEntry('site', 'author');
+		const entry = await getEntry('site', 'index');
 		return {
-			title: siteEntry?.data?.title ?? 'Almost a Footnote',
-			description: siteEntry?.data?.description ?? '',
-			hero: siteEntry?.data?.hero ?? null,
-			author: authorEntry?.data ?? null,
+			title: entry?.data?.title ?? 'Almost a Footnote',
+			description: entry?.data?.description ?? '',
+			hero: entry?.data?.hero ?? null,
+			author: entry?.data?.author ?? null,
 		};
 	} catch {
 		return {
