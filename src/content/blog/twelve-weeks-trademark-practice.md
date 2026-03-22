@@ -7,7 +7,7 @@ tags:
   - trademarks
   - internship
 ---
-
+![Trademark and intellectual property](https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)
 Before this internship, trademarks felt like the tidier corner of IP law. A mark, a class, a registration. By the end of twelve weeks at Company Vakil, I had a more complicated view.
 
 **The volume question**
