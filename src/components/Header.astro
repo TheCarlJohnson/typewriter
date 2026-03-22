@@ -2,28 +2,19 @@
 import HeaderLink from './HeaderLink.astro';
 import SearchModal from './SearchModal.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import { Icon } from 'astro-icon/components';
 const subpath = import.meta.env.BASE_URL;
 ---
-<header class="sticky top-0 z-40 backdrop-blur bg-[color:var(--color-surface)]">
-	<div class="content-shell relative w-full md:w-auto md:mx-auto py-3 md:py-4">
-		<div class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] items-center md:grid-cols-[auto_1fr_auto] md:grid-rows-1">
-			<div class="flex flex-col">
-				<h1 class="text-base font-semibold uppercase m-0 tracking-widest">
-					<a href={subpath} class="hover:opacity-80 transition-opacity no-underline">Almost a Footnote</a>
-				</h1>
-			</div>
-			<nav class="hidden md:flex items-center gap-4 text-[0.68rem] tracking-[0.28em] uppercase text-muted col-span-2 md:col-auto md:justify-self-center">
+<header class="sticky top-0 z-40 backdrop-blur bg-[color:var(--color-surface)] border-b border-[color:var(--color-border)]">
+	<div class="content-shell py-3 md:py-4">
+		<div class="flex items-center justify-between gap-4">
+			<h1 class="text-sm font-semibold uppercase m-0 tracking-widest whitespace-nowrap">
+				<a href={subpath} class="no-underline hover:opacity-70 transition-opacity">Almost a Footnote</a>
+			</h1>
+			<nav class="hidden md:flex items-center gap-6 text-[0.68rem] tracking-[0.28em] uppercase text-muted">
 				<HeaderLink href="/blog">Blog</HeaderLink>
 				<HeaderLink href="/about">About</HeaderLink>
 			</nav>
-			<div class="flex items-center gap-2 md:gap-3 shrink-0 justify-end">
-				<button class="header-button md:hidden" type="button" id="nav-toggle" aria-label="Toggle navigation" aria-pressed="false">
-					<span class="inline-flex header-button__icon" aria-hidden="true">
-						<Icon name="tabler:menu-2" size={18} stroke-width={1.6} />
-					</span>
-					<span class="sr-only">Toggle navigation</span>
-				</button>
+			<div class="flex items-center gap-2 shrink-0">
 				<SearchModal />
 				<ThemeToggle />
 			</div>
@@ -33,23 +24,7 @@ const subpath = import.meta.env.BASE_URL;
 
 <script is:inline>
 const applyNav = (state) => {
-	const isOpen = state === 'open';
-	document.documentElement.dataset.nav = isOpen ? 'open' : 'closed';
-	const button = document.getElementById('nav-toggle');
-	if (button) button.setAttribute('aria-pressed', isOpen ? 'true' : 'false');
-};
-const toggleNav = () => {
-	const current = document.documentElement.dataset.nav === 'open' ? 'open' : 'closed';
-	applyNav(current === 'open' ? 'closed' : 'open');
+	document.documentElement.dataset.nav = state === 'open' ? 'open' : 'closed';
 };
 applyNav('closed');
-const navButton = document.getElementById('nav-toggle');
-if (navButton) navButton.addEventListener('click', toggleNav);
-document.addEventListener('click', (event) => {
-	if (document.documentElement.dataset.nav !== 'open') return;
-	const target = event.target;
-	if (!(target instanceof Element)) return;
-	const navEl = document.querySelector('nav');
-	if (!navButton?.contains(target) && !navEl?.contains(target)) applyNav('closed');
-});
 </script>
