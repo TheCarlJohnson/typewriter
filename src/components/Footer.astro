@@ -1,5 +1,27 @@
 ---
+import Clock from './Clock.astro';
+import AmbientToggle from './AmbientToggle.astro';
 ---
-<footer style="padding: 2rem; border-top: 1px solid #ccc;">
-  <p style="font-size: 0.8rem; opacity: 0.6;">© 2026 Tanmay · Almost a Footnote</p>
+<footer class="border-t border-[color:var(--color-border)] mt-16 py-8">
+  <div class="content-shell">
+    <div class="flex flex-wrap items-start justify-between gap-8 border-b border-[color:var(--color-border)] pb-8">
+      <div class="space-y-3">
+        <p class="eyebrow">Navigation</p>
+        <div class="flex flex-col gap-1.5 text-sm">
+          <a class="text-muted hover:text-[color:var(--color-ink)] transition-colors no-underline" href="/">Home</a>
+          <a class="text-muted hover:text-[color:var(--color-ink)] transition-colors no-underline" href="/blog">Blog</a>
+          <a class="text-muted hover:text-[color:var(--color-ink)] transition-colors no-underline" href="/about">About</a>
+          <a class="text-muted hover:text-[color:var(--color-ink)] transition-colors no-underline" href="/rss.xml">RSS</a>
+        </div>
+      </div>
+      <div class="space-y-3 text-right">
+        <p class="eyebrow">Where I am</p>
+        <Clock label="India" timeZone="Asia/Kolkata" />
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-4 pt-6 text-xs text-muted">
+      <p class="m-0">© {new Date().getFullYear()} Tanmay · Almost a Footnote</p>
+      <AmbientToggle />
+    </div>
+  </div>
 </footer>
