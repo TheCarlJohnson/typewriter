@@ -4,10 +4,10 @@ import SearchModal from './SearchModal.astro';
 import ThemeToggle from './ThemeToggle.astro';
 const subpath = import.meta.env.BASE_URL;
 ---
-<header class="sticky top-0 z-40 backdrop-blur bg-[color:var(--color-surface)] border-b border-[color:var(--color-border)]">
+<header class="sticky top-0 z-40 backdrop-blur bg-[color:var(--color-surface)]">
 	<div class="content-shell py-3">
 		<div class="flex items-center justify-between gap-4">
-			<a href={subpath} class="text-xs font-semibold uppercase tracking-widest no-underline hover:opacity-70 transition-opacity whitespace-nowrap">
+			<a href={subpath} class="text-xs font-semibold uppercase tracking-widest no-underline hover:opacity-70 transition-opacity whitespace-nowrap" style="font-family: var(--font-serif);">
 				Almost a Footnote
 			</a>
 			<nav class="hidden md:flex items-center gap-6 text-[0.68rem] tracking-[0.28em] uppercase text-muted">
@@ -20,6 +20,7 @@ const subpath = import.meta.env.BASE_URL;
 			</div>
 		</div>
 	</div>
+	<div style="height:2px; background:var(--color-accent); width:100%;"></div>
 </header>
 
 <script is:inline>
