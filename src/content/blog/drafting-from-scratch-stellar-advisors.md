@@ -8,7 +8,7 @@ tags:
   - internship
   - FEMA
 ---
-
+![Contract drafting and legal documents](https://images.unsplash.com/photo-1607703703520-bb638e84caf2?w=1200&q=80)
 Most contract drafting advice tells you to start with a precedent. At Stellar Advisors, my first significant drafting task was a Dealership Agreement and an End-User Agreement for a BaaS market context — and the instruction was to draft from scratch using industry precedents as reference, not as templates.
 
 That distinction matters more than it sounds.
