@@ -8,6 +8,8 @@ tags:
   - dispute resolution
 ---
 
+![Arbitration and dispute resolution](https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80)
+
 Arbitration has a reputation for being dry. After eighteen weeks of research across more than twenty-five projects at Dewan & Dewan Law Chambers, I would say that reputation is partly earned and mostly wrong.
 
 The dry part is real — enforcement matrices, jurisdictional timelines, seat versus venue distinctions that turn on a single clause. But underneath the procedure is a set of genuinely interesting questions about what parties actually agreed to, and what happens when that agreement meets a dispute neither side anticipated.
