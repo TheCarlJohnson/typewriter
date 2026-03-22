@@ -1,68 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
-import Card from '../../components/Card.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
-
-import { getSite } from '../../utils/consts';
 import { slugify, withBase } from '../../utils/slugify';
+import readingTime from 'reading-time';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const [featured, ...rest] = posts;
-const site = await getSite();
 ---
-
-<PageLayout title={`Blog · ${site.title}`} description={site.description}>
-	<section class="content-shell note-section py-12 space-y-8">
-		{featured && (
-			<div class="grid grid-cols-1">
-				<Card
-					title={featured.data.title}
-					href={withBase(`/blog/${featured.id}/`)}
-					description={featured.data.description}
-					date={featured.data.pubDate}
-					image={featured.data.heroImage}
-					imageAlt={featured.data.title}
-					variant="post"
-				>
-					{featured.data.tags.length > 0 && (
-						<div class="flex flex-wrap gap-2 pt-1 text-sm text-muted">
-							{featured.data.tags.map((tag) => (
-								<a class="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1 hover:text-ink" href={withBase(`/tags/${slugify(tag)}/`)}>
-									{tag}
-								</a>
-							))}
-						</div>
-					)}
-				</Card>
-			</div>
-		)}
-
-		{rest.length > 0 && (
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-				{rest.map((post) => (
-					<Card
-						title={post.data.title}
-						href={withBase(`/blog/${post.id}/`)}
-						description={post.data.description}
-						date={post.data.pubDate}
-						image={post.data.heroImage}
-						imageAlt={post.data.title}
-						variant="post"
-					>
-						{post.data.tags.length > 0 && (
-							<div class="flex flex-wrap gap-2 pt-1 text-sm text-muted">
-								{post.data.tags.map((tag) => (
-									<a class="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_95%,transparent)] px-3 py-1 hover:text-ink" href={withBase(`/tags/${slugify(tag)}/`)}>
-										{tag}
-									</a>
-								))}
-							</div>
-						)}
-					</Card>
-				))}
-			</div>
-		)}
-	</section>
+<PageLayout title="Blog · Almost a Footnote" description="Writing on law, arbitration, corporate practice, and legal reasoning.">
+  <section class="content-shell py-10">
+    <header class="border-b border-[color:var(--color-border)] pb-6 mb-2">
+      <p class="eyebrow">Writing</p>
+      <h1 class="m-0 text-2xl">All Posts</h1>
+    </header>
+    <div>
+      {posts.map((post) => (
+        <article class="post-list-item">
+          <div class="post-list-meta">
+            {new Date(post.data.pubDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
+            &nbsp;·&nbsp;
+            {readingTime(post.body ?? '').text}
+          </div>
+          <h3>
+            <a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a>
+          </h3>
+          {post.data.description && (
+            <p class="post-list-description">{post.data.description}</p>
+          )}
+          {post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-2">
+              {post.data.tags.map((tag) => (
+                <a href={withBase(`/tags/${slugify(tag)}/`)} class="post-tag">{tag}</a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
 </PageLayout>
