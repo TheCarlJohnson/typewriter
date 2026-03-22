@@ -13,7 +13,7 @@ interface Props {
 import { withBase } from '../utils/slugify';
 const { eyebrow, title, description, actions = [] } = Astro.props;
 ---
-<section class="content-shell pt-16 pb-8 border-b border-[color:var(--color-border)]">
+<section class="content-shell pt-12 pb-10 border-b border-[color:var(--color-border)]">
   <div class="max-w-2xl space-y-4">
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1 class="m-0">{title}</h1>
