@@ -3,9 +3,11 @@ import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import PostList from '../components/PostList.astro';
+import { getSite } from '../utils/consts';
 import { getCollection } from 'astro:content';
 import readingTime from 'reading-time';
 
+const site = await getSite();
 const posts = await getCollection('blog');
 const sorted = posts.sort((a, b) => {
   if (a.data.featured && !b.data.featured) return -1;
@@ -37,10 +39,7 @@ const featured = sorted[0];
       </a>
     </section>
   )}
-  <About author={{
-    name: "Tanmay Satvik",
-    bio: "Penultimate year law student. Writing about corporate law, arbitration, and the spaces between what the law says and what it means."
-  }} />
+  <About author={site.author} />
   <section class="content-shell mt-10 mb-16">
     <p class="eyebrow mb-6">All Writing</p>
     <PostList />
