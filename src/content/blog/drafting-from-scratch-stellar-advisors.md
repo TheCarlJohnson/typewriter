@@ -11,6 +11,15 @@ tags:
 
 Most contract drafting advice tells you to start with a precedent. At Stellar Advisors, my first significant drafting task was a dealership agreement and an end-user agreement for a BaaS market context, and the instruction was to draft from scratch using industry precedents as reference, not as templates.
 
+<div class="takeaways">
+  <span class="takeaways-label">Key takeaways</span>
+  <ul>
+    <li>Drafting from scratch forces every structural choice to be deliberate — you cannot default to how the precedent did it.</li>
+    <li>FEMA in a live transaction is not a framework. It is a series of judgment calls about which rules apply and where the regulatory risk concentrates.</li>
+    <li>Writing for a non-lawyer audience while remaining legally accurate is a different discipline from contract drafting — and equally demanding.</li>
+  </ul>
+</div>
+
 ![Contract drafting and legal documents](https://images.unsplash.com/photo-1607703703520-bb638e84caf2?w=1200&q=80)
 
 That distinction matters more than it sounds.
