@@ -10,6 +10,15 @@ tags:
 
 Arbitration has a reputation for being dry. After eighteen weeks of research across more than twenty-five projects at Dewan & Dewan Law Chambers, I would say that reputation is partly earned and mostly wrong.
 
+<div class="takeaways">
+  <span class="takeaways-label">Key takeaways</span>
+  <ul>
+    <li>Arbitration research means reading the same legal problem through multiple procedural frameworks simultaneously — ICC, SIAC, and domestic law at once.</li>
+    <li>Kompetenz-kompetenz is not an abstract doctrine. In a live jurisdictional challenge, it determines whether the proceeding continues at all.</li>
+    <li>The most interesting legal work sits in the gap between optimistic contract drafting and the dispute that follows when a relationship breaks down.</li>
+  </ul>
+</div>
+
 ![Arbitration and dispute resolution](https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80)
 
 The dry part is real. Enforcement matrices, jurisdictional timelines, seat versus venue distinctions that turn on a single clause. But underneath the procedure is a set of genuinely interesting questions about what parties actually agreed to, and what happens when that agreement meets a dispute neither side anticipated.
