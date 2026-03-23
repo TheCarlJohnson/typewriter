@@ -10,6 +10,15 @@ tags:
 
 Before this internship, trademarks felt like the tidier corner of IP law. A mark, a class, a registration. By the end of twelve weeks at Company Vakil, I had a more complicated view.
 
+<div class="takeaways">
+  <span class="takeaways-label">Key takeaways</span>
+  <ul>
+    <li>Filing trademark applications professionally is not the same as studying the process. The details textbooks skip over become the actual work.</li>
+    <li>Each objected mark is a small argument — why this mark is distinctive, why the examiner's grounds are answerable. The legal standard matters less than knowing how the registry applies it.</li>
+    <li>A cease and desist notice is a strategic communication, not just a legal document. The balance between firmness and overreach is a drafting problem with real consequences.</li>
+  </ul>
+</div>
+
 ![Trademark and intellectual property](https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)
 
 **The volume question**
