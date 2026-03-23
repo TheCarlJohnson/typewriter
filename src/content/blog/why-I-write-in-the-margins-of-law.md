@@ -11,6 +11,15 @@ tags:
 
 Somewhere between a bench synopsis and a counter-affidavit, I started keeping notes that did not belong in either.
 
+<div class="takeaways">
+  <span class="takeaways-label">What this blog is</span>
+  <ul>
+    <li>Close readings of legal problems worked through in practice, not summarised from textbooks.</li>
+    <li>Arguments that are still being refined. Some will be wrong.</li>
+    <li>A record of how I think, not what I have done. The CV handles that.</li>
+  </ul>
+</div>
+
 Not case notes. Not research memos. Something closer to thinking out loud about why a judge reasoned the way they did, whether a drafting choice in an agreement would survive a dispute, or what it means to study law in a system still sorting out its own identity.
 
 This blog is that margin, made public.
