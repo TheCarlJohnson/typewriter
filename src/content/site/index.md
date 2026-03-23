@@ -5,6 +5,6 @@ hero:
   title: Almost a Footnote
   subtitle: Legal reasoning, personal reflection, and the occasional science-backed detour.
 author:
-  name: Tanmay Satvik
-  bio: Penultimate year law student. Writing about corporate law, arbitration, and the spaces between what the law says and what it means.
+  name: Almost a Footnote
+  bio: Technically a law student. Practically, someone who reads too many judgments and has opinions about all of them.
 ---
